@@ -70,5 +70,5 @@ metadata/_edit_use_anchors_ = true
 [node name="AutoHarvester" parent="." instance=ExtResource("4_s5dwq")]
 position = Vector2(1006, 102)
 
-[node name="ImprovedTools" parent="." instance=ExtResource("6_lw8k7")]
+[node name="Improved Tools" parent="." instance=ExtResource("6_lw8k7")]
 position = Vector2(1396, 102)

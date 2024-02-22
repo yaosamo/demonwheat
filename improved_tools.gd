@@ -1,8 +1,9 @@
 extends Node2D
 
+signal Tools
 @export var basecost = 10
 @export var costrate = 1
-var autoharvesters = 0
+var improvedTools = 0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -11,22 +12,20 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	#AutoHarvester upd value and label
-	Global.wheatValue += 1*autoharvesters*delta
-	$HarvestersAmount.text = str(autoharvesters)
+	#Improved tools upd
+	$ToolsAmount.text = str(improvedTools)
 	$PriceValue.text = str(basecost*costrate)
 	pass
 
 
 # Press button to start timer once
 func _on_texture_button_pressed():
-	var harvesterPrice = basecost*costrate
-	# Check if player have enough resource to buy a harvester 
-	print_debug("Global wheat", Global.wheatValue)
-	if Global.wheatValue >= harvesterPrice:
-		
+	var toolsPrice = basecost*costrate
+	# Check if player have enough resource to buy a tool 
+	if Global.wheatValue >= toolsPrice:
 		#take resources
-		Global.wheatValue -= harvesterPrice
-		autoharvesters += 1
-		print("Harvesters added: ", autoharvesters)
+		Global.wheatValue -= toolsPrice
+		improvedTools += 1
+		emit_signal("tools")
+		print("Tools added: ", improvedTools)
 		pass # Replace with function body.

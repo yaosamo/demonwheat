@@ -1,7 +1,6 @@
 extends Node
 
-var wheatValue: Label
-var count: int
+var wheatValue: float
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
