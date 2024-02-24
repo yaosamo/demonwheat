@@ -41,17 +41,16 @@ func _process(delta):
 	#AutoHarvester upd value and label
 	var wheatPerSec = bonuses[\"Autoharvester\"].amount*pow(1.05,(bonuses[\"Tools\"].amount))
 	wheatValue += wheatPerSec*delta
-	$WheatLabel/WheatValue.text = str( wheatValue)
+	$WheatLabel/WheatValue.text = str(int(wheatValue))
 	$HarvestSpeed.text = str(formatThis(wheatPerSec), \" / sec\")
 	# manual click 
 	pass
 
-func MakeMeThousandFrom(number):
-	var formatted_number = String().format(\"%'d\", round(number))
-	return formatted_number
+func MakeMeThousandFrom(number) -> String:
+	return String().format(\"%'d\", number)
 
 
-func formatThis(number) -> String:
+func formatThis(number):
 	var format_string = \"%*.*f\"
 	var number_formatted = format_string % [0, 2, number]
 	return number_formatted

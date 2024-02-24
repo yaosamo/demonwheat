@@ -3,11 +3,11 @@
 [ext_resource type="Theme" uid="uid://b4h3syf1usohg" path="res://theme.tres" id="1_cxly1"]
 [ext_resource type="Script" path="res://improved_tools.gd" id="1_pry6a"]
 
-[sub_resource type="Gradient" id="Gradient_jfkvp"]
+[sub_resource type="Gradient" id="Gradient_oxmm2"]
 colors = PackedColorArray(0.617455, 0.617455, 0.617455, 1, 0.832474, 0.832474, 0.832474, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_3skyk"]
-gradient = SubResource("Gradient_jfkvp")
+gradient = SubResource("Gradient_oxmm2")
 
 [node name="ImprovedTools" type="Node2D"]
 script = ExtResource("1_pry6a")

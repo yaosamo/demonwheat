@@ -22,10 +22,10 @@ func _process(delta):
 func _on_texture_button_pressed():
 	var toolsPrice = basecost*costrate
 	# Check if player have enough resource to buy a tool 
-	if Global.wheatValue >= toolsPrice:
+	if $"/root/Main".wheatValue >= toolsPrice:
 		#take resources
-		Global.wheatValue -= toolsPrice
+		$"/root/Main".wheatValue -= toolsPrice
 		improvedTools += 1
-		emit_signal("tools")
+		$"/root/Main"._test(improvedTools)
 		print("Tools added: ", improvedTools)
 		pass # Replace with function body.

@@ -19,7 +19,7 @@ func _input(event):
 # check if mouse if over sprite
 			if get_rect().has_point(to_local(mouse_position)):
 				print("Manually Harvested")
-				Global.wheatValue += 1
+				$"/root/Main".wheatValue += 1
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

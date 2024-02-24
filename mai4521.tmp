@@ -1,0 +1,95 @@
+[gd_scene load_steps=8 format=3 uid="uid://570hps3njcqy"]
+
+[ext_resource type="Theme" uid="uid://b4h3syf1usohg" path="res://theme.tres" id="1_hvc3h"]
+[ext_resource type="Script" path="res://Field.gd" id="1_nhlj6"]
+[ext_resource type="Texture2D" uid="uid://bncc4d6kxxylm" path="res://Graphics/Field@2x.png" id="1_yaavq"]
+[ext_resource type="PackedScene" uid="uid://bd355s2v41us7" path="res://auto_harvester.tscn" id="4_s5dwq"]
+[ext_resource type="PackedScene" uid="uid://dgaupk03ux6t5" path="res://improved_tools.tscn" id="6_lw8k7"]
+
+[sub_resource type="GDScript" id="GDScript_s2meh"]
+script/source = "extends Node2D
+
+var wheatValue: float
+var bonuses : Array = [{\"Name\" : \"Autoharvester\", \"Price\" : 10 }, {\"Name\" : \"Tools\", \"Price\" : 10}]
+
+@onready var bonusprototype = preload(\"res://bonus.tscn\")
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	var node
+	for b in bonuses:
+		node = bonusprototype.instantiate()
+		node.bonusname = b[\"Name\"]
+		node.price = b[\"Price\"]
+		$Bonuses.add_child(node)
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	# Add wheat, rates etc
+	# manual click 
+	# autoharvester 
+	pass
+
+
+func _test(tools):
+	print_debug(\"Hi\", tools)
+	pass
+
+
+
+
+"
+
+[sub_resource type="GDScript" id="GDScript_o0foy"]
+script/source = "extends Label
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
+
+[node name="Main" type="Node2D"]
+script = SubResource("GDScript_s2meh")
+
+[node name="Field" type="Sprite2D" parent="."]
+position = Vector2(459, 544)
+scale = Vector2(0.614258, 0.614258)
+texture = ExtResource("1_yaavq")
+script = ExtResource("1_nhlj6")
+
+[node name="WheatLabel" type="Label" parent="."]
+offset_left = 27.0
+offset_top = 21.0
+offset_right = 78.0
+offset_bottom = 44.0
+theme = ExtResource("1_hvc3h")
+text = "Wheat:"
+script = SubResource("GDScript_o0foy")
+metadata/_edit_use_anchors_ = true
+
+[node name="WheatValue" type="Label" parent="WheatLabel"]
+layout_mode = 0
+offset_left = 88.0
+offset_right = 123.0
+offset_bottom = 34.0
+theme = ExtResource("1_hvc3h")
+text = "0"
+metadata/_edit_use_anchors_ = true
+
+[node name="AutoHarvester" parent="." instance=ExtResource("4_s5dwq")]
+position = Vector2(1006, 102)
+basecost = null
+costrate = null
+
+[node name="ImprovedTools" parent="." instance=ExtResource("6_lw8k7")]
+position = Vector2(1396, 102)
+
+[node name="Bonuses" type="Node2D" parent="."]
