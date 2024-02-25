@@ -11,7 +11,7 @@ var wheatValue : float
 var bonuscount : float
 var bonuses : Dictionary = {}
 var tools : float
-var bonusdata : Array = [{\"Name\" : \"Autoharvester\", \"Price\" : 10 }, {\"Name\" : \"Tools\", \"Price\" : 10}, {\"Name\" : \"Tools 2\", \"Price\" : 10}, {\"Name\" : \"Tools 3\", \"Price\" : 10}]
+var bonusdata : Array = [{\"Name\" : \"Autoharvester\", \"Price\" : 5 }, {\"Name\" : \"Tools\", \"Price\" : 10}, {\"Name\" : \"Not working yet\", \"Price\" : 1000}, {\"Name\" : \"Not working yet 2\", \"Price\" : 10000}]
 
 @onready var bonusprototype = preload(\"res://bonus.tscn\")
 
@@ -41,14 +41,27 @@ func _process(delta):
 	#AutoHarvester upd value and label
 	var wheatPerSec = bonuses[\"Autoharvester\"].amount*pow(1.05,(bonuses[\"Tools\"].amount))
 	wheatValue += wheatPerSec*delta
-	$WheatLabel/WheatValue.text = str( wheatValue)
+	$WheatLabel/WheatValue.text = thousandsFrom(int(wheatValue))
 	$HarvestSpeed.text = str(formatThis(wheatPerSec), \" / sec\")
-	# manual click 
+	# manual click
 	pass
 
-func MakeMeThousandFrom(number):
-	var formatted_number = String().format(\"%'d\", round(number))
-	return formatted_number
+func thousandsFrom(val: int) -> String:
+	var val_str = str(val)
+	var formatted = \"\"
+	var text_length = val_str.length()
+	
+	if text_length < 4:
+		return val_str
+	
+	var count = 0
+	for i in range(text_length - 1, -1, -1):
+		formatted = val_str[i] + formatted
+		count += 1
+		if count % 3 == 0 and count != text_length:
+			formatted = \",\" + formatted
+	return formatted
+
 
 
 func formatThis(number) -> String:
@@ -124,11 +137,29 @@ offset_bottom = 859.0
 
 [node name="HarvestSpeed" type="Label" parent="."]
 offset_left = 27.0
-offset_top = 57.0
-offset_right = 82.0
-offset_bottom = 80.0
+offset_top = 62.0
+offset_right = 97.0
+offset_bottom = 88.0
 size_flags_vertical = 8
 theme = ExtResource("1_hvc3h")
-theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.0745098, 0.0745098, 0.0745098, 1)
+theme_override_font_sizes/font_size = 18
 text = "1.2 / sec
+"
+
+[node name="Quota" type="Label" parent="."]
+offset_left = 645.0
+offset_top = 21.0
+offset_right = 823.0
+offset_bottom = 55.0
+theme = ExtResource("1_hvc3h")
+text = "Demons quota:"
+
+[node name="Label" type="Label" parent="Quota"]
+layout_mode = 0
+offset_left = 186.0
+offset_right = 228.0
+offset_bottom = 34.0
+theme = ExtResource("1_hvc3h")
+text = "100
 "
