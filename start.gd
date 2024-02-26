@@ -5,6 +5,7 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Button.connect("pressed", pressed.bind())
+	$Button.connect("mouse_entered", hover.bind())
 	pass # Replace with function body.
 
 func pressed():
@@ -12,6 +13,9 @@ func pressed():
 		print("no next scene here")
 	else:
 		next_scene()
+		
+func hover():
+	$AnimationPlayer.play("StartButton")
 		
 func next_scene():
 	var ERR = get_tree().change_scene_to_packed(target_scene)

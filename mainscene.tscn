@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://570hps3njcqy"]
+[gd_scene load_steps=5 format=3 uid="uid://570hps3njcqy"]
 
 [ext_resource type="Theme" uid="uid://b4h3syf1usohg" path="res://theme.tres" id="1_hvc3h"]
-[ext_resource type="Script" path="res://Field.gd" id="1_nhlj6"]
-[ext_resource type="Texture2D" uid="uid://bncc4d6kxxylm" path="res://Graphics/Field@2x.png" id="1_yaavq"]
+[ext_resource type="PackedScene" uid="uid://bom0j7y5ttd2h" path="res://field.tscn" id="2_qv7ff"]
 
 [sub_resource type="GDScript" id="GDScript_s2meh"]
 script/source = "extends Node2D
@@ -103,12 +102,6 @@ func _process(delta):
 [node name="Main" type="Node2D"]
 script = SubResource("GDScript_s2meh")
 
-[node name="Field" type="Sprite2D" parent="."]
-position = Vector2(459, 544)
-scale = Vector2(0.614258, 0.614258)
-texture = ExtResource("1_yaavq")
-script = ExtResource("1_nhlj6")
-
 [node name="WheatLabel" type="Label" parent="."]
 offset_left = 27.0
 offset_top = 21.0
@@ -163,3 +156,6 @@ offset_bottom = 34.0
 theme = ExtResource("1_hvc3h")
 text = "100
 "
+
+[node name="FieldArea" parent="." instance=ExtResource("2_qv7ff")]
+position = Vector2(115, 211)
