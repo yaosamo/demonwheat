@@ -24,10 +24,10 @@ func _input(event):
 					print("released")
 
 func pressed():
-	get_parent().get_node("FieldClick").play("FieldClick", -1, 1.0, false)
+	get_parent().get_node("FieldAnimation").play("Click")
 	
 func released():
-	get_parent().get_node("FieldRelease").play("FieldRelease", -1, 1.0, false)
+	get_parent().get_node("FieldAnimation").play("Release")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

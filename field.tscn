@@ -1,10 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bom0j7y5ttd2h"]
+[gd_scene load_steps=6 format=3 uid="uid://bom0j7y5ttd2h"]
 
 [ext_resource type="Texture2D" uid="uid://bncc4d6kxxylm" path="res://Graphics/Field@2x.png" id="1_vb4ep"]
 [ext_resource type="Script" path="res://Field.gd" id="2_3l0qd"]
 
 [sub_resource type="Animation" id="Animation_58tq5"]
-resource_name = "FieldClick"
+resource_name = "Click"
 length = 0.12
 step = 0.01
 tracks/0/type = "value"
@@ -14,14 +14,16 @@ tracks/0/path = NodePath("Field:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.12),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.12),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(0.65, 0.65), Vector2(0.6, 0.6)]
+"values": [Vector2(0.65, 0.65), Vector2(0.578125, 0.578125), Vector2(0.6, 0.6)]
 }
 
-[sub_resource type="Animation" id="Animation_qcug7"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_17wrr"]
+resource_name = "Release"
+length = 0.12
+step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -29,71 +31,28 @@ tracks/0/path = NodePath("Field:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1, 0.12),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(0.65, 0.65)]
+"values": [Vector2(0.6, 0.6), Vector2(0.6875, 0.6875), Vector2(0.65, 0.65)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sph8y"]
 _data = {
-"FieldClick": SubResource("Animation_58tq5"),
-"RESET": SubResource("Animation_qcug7")
-}
-
-[sub_resource type="Animation" id="Animation_d6oem"]
-resource_name = "FieldRelease"
-length = 0.12
-step = 0.01
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Field:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.12),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0.6, 0.6), Vector2(0.65, 0.65)]
-}
-
-[sub_resource type="Animation" id="Animation_4n85m"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Field:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.6, 0.6)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_0mi1o"]
-_data = {
-"FieldRelease": SubResource("Animation_d6oem"),
-"RESET": SubResource("Animation_4n85m")
+"Click": SubResource("Animation_58tq5"),
+"Release": SubResource("Animation_17wrr")
 }
 
 [node name="FieldArea" type="Node2D"]
 
 [node name="Field" type="Sprite2D" parent="."]
 position = Vector2(345, 222)
-scale = Vector2(0.6, 0.6)
+scale = Vector2(0.65, 0.65)
 texture = ExtResource("1_vb4ep")
 offset = Vector2(0.000183105, -0.000106812)
 script = ExtResource("2_3l0qd")
 
-[node name="FieldClick" type="AnimationPlayer" parent="."]
+[node name="FieldAnimation" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_sph8y")
-}
-
-[node name="FieldRelease" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_0mi1o")
 }

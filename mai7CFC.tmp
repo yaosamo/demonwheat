@@ -45,9 +45,8 @@ func _process(delta):
 	# manual click
 	pass
 
-# Oleh's magic
 func thousandsFrom(val) -> String:
-	var v := int(val)
+	var v := round(val)
 	var p :Array[String] = []
 	while v >= 1000:
 		p.append(\"%03d\" % (v % 1000))
@@ -55,7 +54,8 @@ func thousandsFrom(val) -> String:
 	p.append(str(v))
 	p.reverse()
 	return \",\".join(p)
-	
+
+
 
 func formatThis(number) -> String:
 	var format_string = \"%*.*f\"
