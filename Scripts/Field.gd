@@ -1,13 +1,10 @@
 extends Sprite2D
 
-var tools_instance
+var wheatBurst = preload("res://Scenes/wheat_burst.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#connect("tools", _on_Tools_emitted())
 	set_process_input(true) # Enable input processing
-	var wheatValue = get_parent().get_node("WheatLabel/WheatValue")
-
 
 
 func _input(event):
@@ -19,6 +16,7 @@ func _input(event):
 					print("Manually Harvested")
 					pressed()
 					$"/root/Main".wheatValue += 1
+					spawnParticle(mouse_position)
 				elif event.is_released:
 					released()
 					print("released")
@@ -28,6 +26,11 @@ func pressed():
 	
 func released():
 	get_parent().get_node("FieldAnimation").play("Release")
+	
+func spawnParticle(pos: Vector2):
+	var new_particle = wheatBurst.instantiate()
+	add_child(new_particle)
+	new_particle.global_position = pos
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dgaupk03ux6t5"]
 
 [ext_resource type="Theme" uid="uid://b4h3syf1usohg" path="res://theme.tres" id="1_cxly1"]
-[ext_resource type="Script" path="res://improved_tools.gd" id="1_pry6a"]
+[ext_resource type="Script" path="res://Scripts/improved_tools.gd" id="1_pry6a"]
 
 [sub_resource type="Gradient" id="Gradient_oxmm2"]
 colors = PackedColorArray(0.617455, 0.617455, 0.617455, 1, 0.832474, 0.832474, 0.832474, 1)

@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://bffwwtpwr7jp"]
+
+[ext_resource type="Texture2D" uid="uid://c5os0arquo480" path="res://Graphics/single-wheat.png" id="1_w33m0"]
+[ext_resource type="Script" path="res://Scripts/Particles.gd" id="2_6od33"]
+
+[sub_resource type="Curve" id="Curve_i2m0v"]
+_data = [Vector2(0.736051, 1), 0.0, -0.033386, 0, 0, Vector2(1, 0), -1.34009, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_fxhg8"]
+curve = SubResource("Curve_i2m0v")
+
+[sub_resource type="Curve" id="Curve_c5l7r"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_d1i1y"]
+curve_y = SubResource("Curve_c5l7r")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1uwn4"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 31.37
+angle_min = -43.8
+angle_max = 81.8
+angular_velocity_min = -29.21
+angular_velocity_max = 143.13
+directional_velocity_min = -209.97
+directional_velocity_max = -78.52
+directional_velocity_curve = SubResource("CurveXYZTexture_d1i1y")
+radial_velocity_min = 100.0
+radial_velocity_max = 125.76
+gravity = Vector3(0, 100, 0)
+alpha_curve = SubResource("CurveTexture_fxhg8")
+
+[node name="WheatBurst" type="Node2D"]
+
+[node name="Particles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 4
+process_material = SubResource("ParticleProcessMaterial_1uwn4")
+texture = ExtResource("1_w33m0")
+lifetime = 0.8
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+script = ExtResource("2_6od33")
+
+[connection signal="finished" from="Particles" to="Particles" method="_on_finished"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://s42ncte8qsml"]
 
-[ext_resource type="Script" path="res://bonus.gd" id="1_crqun"]
-[ext_resource type="Theme" uid="uid://b4h3syf1usohg" path="res://theme.tres" id="1_objn4"]
+[ext_resource type="Script" path="res://Scripts/bonus.gd" id="1_4yqgk"]
+[ext_resource type="Theme" uid="uid://b4h3syf1usohg" path="res://theme.tres" id="2_35xfu"]
 
 [sub_resource type="Gradient" id="Gradient_jfkvp"]
 colors = PackedColorArray(0.617455, 0.617455, 0.617455, 1, 0.832474, 0.832474, 0.832474, 1)
@@ -10,7 +10,7 @@ colors = PackedColorArray(0.617455, 0.617455, 0.617455, 1, 0.832474, 0.832474, 0
 gradient = SubResource("Gradient_jfkvp")
 
 [node name="Bonus" type="Node2D"]
-script = ExtResource("1_crqun")
+script = ExtResource("1_4yqgk")
 bonusname = "Name"
 price = 100
 amount = 2
@@ -28,7 +28,7 @@ offset_top = 16.0
 offset_right = 201.0
 offset_bottom = 50.0
 size_flags_vertical = 1
-theme = ExtResource("1_objn4")
+theme = ExtResource("2_35xfu")
 text = "Name"
 
 [node name="Amount" type="Label" parent="."]
@@ -37,7 +37,7 @@ offset_top = 16.0
 offset_right = 304.0
 offset_bottom = 50.0
 size_flags_vertical = 1
-theme = ExtResource("1_objn4")
+theme = ExtResource("2_35xfu")
 text = "2"
 
 [node name="Price" type="Label" parent="."]
@@ -46,7 +46,7 @@ offset_top = 224.0
 offset_right = 84.0
 offset_bottom = 258.0
 size_flags_horizontal = 6
-theme = ExtResource("1_objn4")
+theme = ExtResource("2_35xfu")
 text = "Price"
 
 [node name="PriceValue" type="Label" parent="."]
@@ -55,5 +55,5 @@ offset_top = 224.0
 offset_right = 138.0
 offset_bottom = 258.0
 size_flags_horizontal = 6
-theme = ExtResource("1_objn4")
+theme = ExtResource("2_35xfu")
 text = "100"
