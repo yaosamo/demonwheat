@@ -24,4 +24,4 @@ mouse_cursor/custom_image="res://Graphics/cursor.png"
 
 [rendering]
 
-environment/defaults/default_clear_color=Color(1, 0.92549, 0.776471, 1)
+environment/defaults/default_clear_color=Color(0.964706, 0.913725, 0.780392, 1)

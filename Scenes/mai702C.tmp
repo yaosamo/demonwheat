@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://570hps3njcqy"]
+[gd_scene load_steps=4 format=3 uid="uid://570hps3njcqy"]
 
 [ext_resource type="Theme" uid="uid://b4h3syf1usohg" path="res://theme.tres" id="1_hvc3h"]
-[ext_resource type="Texture2D" uid="uid://biubr4xhbcwm6" path="res://Graphics/Bg.png" id="1_pqivk"]
 [ext_resource type="PackedScene" uid="uid://bom0j7y5ttd2h" path="res://Scenes/FieldScene.tscn" id="2_i6nkf"]
 
 [sub_resource type="GDScript" id="GDScript_s2meh"]
@@ -11,30 +10,36 @@ var wheatValue : float
 var bonuscount : float
 var bonuses : Dictionary = {}
 var tools : float
-var bonusdatafile = preload(\"res://Scripts/bonusesData.tres\")
+var bonusdata = load(\"res://Scripts/bonusesData.tres\")
+var json_string = JSON.stringify(bonusdata)
 
 @onready var bonusprototype = preload(\"res://Scenes/bonus.tscn\")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var bonusdata = bonusdatafile.data
-	print_debug(bonusdata, bonusdata.size())
+	print(\"HELLO\")
+	var json = JSON.new()
+	var error = json.parse(json_string)
+	if error == OK:
+		var data_received = json.data
+		if typeof(data_received) == TYPE_ARRAY:
+			print(\"HI\",data_received) # Prints array
+	else:
+		print(\"Unexpected data\")
 	#Instance of the bonus scene and feed it with data from array / node is the bonus button
 	var node
 	for i in range(bonusdata.size()):
-		var b = bonusdata[i]
+		#var b = bonusdata[i]
 		node = bonusprototype.instantiate()
-		node.bonusname = b[\"Name\"]
-		node.bonusdesc = b[\"Desc\"]
-		node.price = b[\"Price\"]
+		#node.bonusname = b[\"Name\"]
+		#node.price = b[\"Price\"]
 		node.baseprice = node.price
 		node.amount = 0
-		#node.position.y = i % 3 * 300 (select 3rd)
-		node.position.y = 96*i
-		#node.position.x = 400 * i
+		node.position.y = i % 3 * 300
+		node.position.x = int(i / 3) * 400
 		$Bonuses.add_child(node)
 		bonuses[node.bonusname] = node
-		# function called when signal pressed happend on Button Node
+		# function test called when signal pressed happend on Button Node
 		# to make separate functions for bonuses, check for buttonname
 		node.get_node(\"Button\").connect(\"pressed\", bonuspurchase.bind(node))
 	pass 
@@ -43,10 +48,10 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	#AutoHarvester upd value and label
-	var wheatPerSec = bonuses[\"Autoharvester\"].amount*pow(1.05,(bonuses[\"Better tools\"].amount))
+	var wheatPerSec = bonuses[\"Autoharvester\"].amount*pow(1.05,(bonuses[\"Tools\"].amount))
 	wheatValue += wheatPerSec*delta
 	$WheatValue.text = thousandsFrom(wheatValue) + \" wheat\"
-	$HarvestSpeed.text = str(decimalsFrom(wheatPerSec), \" / sec\")
+	$HarvestSpeed.text = str(formatThis(wheatPerSec), \" / sec\")
 	# manual click
 	pass
 
@@ -61,8 +66,8 @@ func thousandsFrom(val) -> String:
 	p.reverse()
 	return \",\".join(p)
 	
-#Format string \"1.25 wheat / sec\"
-func decimalsFrom(number) -> String:
+
+func formatThis(number) -> String:
 	var format_string = \"%*.*f\"
 	var number_formatted = format_string % [0, 2, number]
 	return number_formatted
@@ -87,11 +92,6 @@ func bonuspurchase(node):
 [node name="Main" type="Node2D"]
 script = SubResource("GDScript_s2meh")
 
-[node name="Bg" type="Sprite2D" parent="."]
-position = Vector2(1432, 544)
-scale = Vector2(0.527065, 0.527065)
-texture = ExtResource("1_pqivk")
-
 [node name="WheatValue" type="Label" parent="."]
 offset_left = 52.0
 offset_top = 44.0
@@ -102,11 +102,11 @@ text = "0"
 metadata/_edit_use_anchors_ = true
 
 [node name="Bonuses" type="Node2D" parent="."]
-position = Vector2(1160, 201)
+position = Vector2(1016, 64)
 
 [node name="ReferenceRect" type="ReferenceRect" parent="Bonuses"]
-offset_right = 550.0
-offset_bottom = 703.0
+offset_right = 767.0
+offset_bottom = 859.0
 
 [node name="HarvestSpeed" type="Label" parent="."]
 offset_left = 52.0

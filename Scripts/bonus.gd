@@ -3,6 +3,7 @@
 extends Node2D
 
 @export var bonusname: String
+@export var bonusdesc: String
 @export var price: int
 @export var amount : int
 @export var baseprice : int
@@ -17,4 +18,5 @@ func _process(delta):
 	$Title.text = bonusname
 	$PriceValue.text = str(price)
 	$Amount.text = str(amount)
+	$Desc.text = str(bonusdesc)
 	pass

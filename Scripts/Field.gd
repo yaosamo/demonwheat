@@ -15,6 +15,8 @@ func _input(event):
 				if event.pressed:
 					print("Manually Harvested")
 					pressed()
+					#call main function instead 
+					#add visual que
 					$"/root/Main".wheatValue += 1
 					spawnParticle(mouse_position)
 				elif event.is_released:
