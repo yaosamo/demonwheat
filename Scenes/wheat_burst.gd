@@ -1,19 +1,11 @@
-extends GPUParticles2D
+extends Node2D
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	self.emitting = true
-	self.amount = randi_range(1,5)
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
-
-
-func _on_finished():
-	self.queue_free()
-	#removes particle once it's finished emitting
-	pass # Replace with function body.

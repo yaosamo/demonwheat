@@ -29,13 +29,15 @@ func _ready():
 		node.price = b[\"Price\"]
 		node.baseprice = node.price
 		node.amount = 0
-		node.position.y = i * 96
+		#node.position.y = i % 3 * 300 (select 3rd)
+		node.position.y = 96*i
+		#node.position.x = 400 * i
 		$Bonuses.add_child(node)
 		bonuses[node.bonusname] = node
 		# function called when signal pressed happend on Button Node
 		# to make separate functions for bonuses, check for buttonname
 		node.get_node(\"Button\").connect(\"pressed\", bonuspurchase.bind(node))
-	pass
+	pass 
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

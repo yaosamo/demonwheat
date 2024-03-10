@@ -11,7 +11,7 @@ var wheatValue : float
 var bonuscount : float
 var bonuses : Dictionary = {}
 var tools : float
-var bonusdatafile = preload(\"res://Scripts/bonusData.tres\")
+var bonusdatafile = preload(\"res://Scripts/bonusesData.tres\")
 
 @onready var bonusprototype = preload(\"res://Scenes/bonus.tscn\")
 
@@ -29,31 +29,29 @@ func _ready():
 		node.price = b[\"Price\"]
 		node.baseprice = node.price
 		node.amount = 0
-		node.position.y = i * 96
+		#node.position.y = i % 3 * 300 (select 3rd)
+		node.position.y = 96*i
+		#node.position.x = 400 * i
 		$Bonuses.add_child(node)
 		bonuses[node.bonusname] = node
 		# function called when signal pressed happend on Button Node
 		# to make separate functions for bonuses, check for buttonname
 		node.get_node(\"Button\").connect(\"pressed\", bonuspurchase.bind(node))
-	pass
+	pass 
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	#AutoHarvester upd value and label
-	var wheatPerSec = bonusesPower()
+	var wheatPerSec = bonuses[\"Autoharvester\"].amount*pow(1.05,(bonuses[\"Better tools\"].amount))
 	wheatValue += wheatPerSec*delta
 	$WheatValue.text = thousandsFrom(wheatValue) + \" wheat\"
 	$HarvestSpeed.text = str(decimalsFrom(wheatPerSec), \" / sec\")
 	pass
 	
-func bonusesPower() -> float:
-	var fieldworker = bonuses[\"Field Worker\"].amount
-	var harvester = bonuses[\"Harvester\"].amount
-	var succubus = bonuses[\"Succubus\"].amount
-	# combined wheat per second 1.05 = 5% adding bonus: *pow(1.05,bettertools)
-	var wheatPerSec = ((fieldworker*0.5+harvester))
-	return wheatPerSec
+func bonusesPower() -> int:
+	var autoharvesters = bonuses[\"Autoharvester\"].amount
+	return 0
 	
 
 # Oleh's magic
@@ -82,7 +80,7 @@ func bonuspurchase(node):
 		wheatValue -= node.price
 		node.amount += 1
 		# Setting price 
-		node.price = node.baseprice*pow(1.15, node.amount)
+		node.price = node.baseprice*pow(1.2, node.amount)
 		print(\"Bonus added: \", node.amount)
 	pass
 
