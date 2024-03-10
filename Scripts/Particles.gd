@@ -12,8 +12,3 @@ func _ready():
 func _process(delta):
 	pass
 
-
-func _on_finished():
-	self.queue_free()
-	#removes particle once it's finished emitting
-	pass # Replace with function body.

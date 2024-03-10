@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bffwwtpwr7jp"]
+[gd_scene load_steps=18 format=3 uid="uid://bffwwtpwr7jp"]
 
 [ext_resource type="Script" path="res://Scenes/wheat_burst.gd" id="1_m7fmv"]
 [ext_resource type="Texture2D" uid="uid://c5os0arquo480" path="res://Graphics/single-wheat.png" id="1_w33m0"]
@@ -13,17 +13,27 @@ point_count = 2
 [sub_resource type="CurveTexture" id="CurveTexture_saqqh"]
 curve = SubResource("Curve_2ys1v")
 
+[sub_resource type="Curve" id="Curve_u4xao"]
+_data = [Vector2(0.316524, 0.997657), 0.0, 0.0, 0, 0, Vector2(0.745708, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_t18su"]
+curve = SubResource("Curve_u4xao")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v01id"]
 particle_flag_disable_z = true
 emission_shape = 1
 emission_sphere_radius = 1.0
 angular_velocity_min = -96.39
-angular_velocity_max = 99.31
+angular_velocity_max = 306.69
+orbit_velocity_min = -0.097
+orbit_velocity_max = 0.122
 radial_velocity_min = 200.0
 radial_velocity_max = 200.0
 gravity = Vector3(0, 100, 0)
-scale_min = 0.1
-scale_max = 0.2
+scale_min = 0.08
+scale_max = 0.15
+scale_curve = SubResource("CurveTexture_t18su")
 color = Color(0.866667, 0.721569, 0.635294, 1)
 alpha_curve = SubResource("CurveTexture_saqqh")
 
@@ -95,6 +105,5 @@ explosiveness = 1.0
 randomness = 1.0
 script = ExtResource("2_6od33")
 
-[connection signal="finished" from="Tinyparticles" to="Tinyparticles" method="_on_finished"]
+[connection signal="finished" from="Tinyparticles" to="." method="_on_finished"]
 [connection signal="finished" from="Particles" to="." method="_on_particles_finished"]
-[connection signal="finished" from="Particles" to="Particles" method="_on_finished"]
