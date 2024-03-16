@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://xmmt1r1up00r"]
+
+[ext_resource type="Script" path="res://Scenes/timeline.gd" id="1_knsao"]
+[ext_resource type="Theme" uid="uid://b4h3syf1usohg" path="res://theme.tres" id="1_nfvnf"]
+[ext_resource type="Texture2D" uid="uid://n7obiibjqldp" path="res://Graphics/Timeline@2x.png" id="3_4285u"]
+[ext_resource type="Texture2D" uid="uid://ccg6ri6ptvvag" path="res://Graphics/DemonIcon@2x.png" id="4_8fbct"]
+
+[node name="Timeline" type="Node2D"]
+script = ExtResource("1_knsao")
+
+[node name="timerLabel" type="Label" parent="."]
+offset_left = 665.0
+offset_top = 80.0
+offset_right = 833.0
+offset_bottom = 104.0
+theme = ExtResource("1_nfvnf")
+theme_override_font_sizes/font_size = 16
+text = "12 months til demons"
+horizontal_alignment = 2
+
+[node name="Timeline_2x" type="Sprite2D" parent="."]
+position = Vector2(421.12, 32)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_4285u")
+
+[node name="Now" type="Label" parent="."]
+offset_left = 13.0
+offset_top = 80.0
+offset_right = 77.0
+offset_bottom = 104.0
+theme = ExtResource("1_nfvnf")
+theme_override_font_sizes/font_size = 16
+text = "Now
+"
+
+[node name="DemonIcon" type="Sprite2D" parent="."]
+position = Vector2(818, 35)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_8fbct")

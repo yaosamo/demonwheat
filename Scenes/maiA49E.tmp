@@ -69,7 +69,6 @@ func _process(delta):
 	wheatValue += wheatPerSec*delta
 	$WheatValue.text = thousandsFrom(wheatValue) + \" wheat\"
 	$HarvestSpeed.text = str(decimalsFrom(wheatPerSec), \" / sec\")
-	$Quota/Val.text = str($Timeline.demonQuota)
 	pass
 
 
@@ -171,7 +170,7 @@ theme = ExtResource("1_hvc3h")
 theme_override_font_sizes/font_size = 24
 text = "Demons quota:"
 
-[node name="Val" type="Label" parent="Quota"]
+[node name="Label" type="Label" parent="Quota"]
 layout_mode = 0
 offset_left = 194.0
 offset_right = 245.0
@@ -185,4 +184,4 @@ text = "100
 position = Vector2(107, 247)
 
 [node name="Timeline" parent="." instance=ExtResource("4_bhfg0")]
-position = Vector2(80, 848)
+position = Vector2(52, 968)

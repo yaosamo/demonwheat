@@ -1,48 +1,44 @@
-[gd_scene load_steps=6 format=3 uid="uid://570hps3njcqy"]
+[gd_scene load_steps=5 format=3 uid="uid://570hps3njcqy"]
 
 [ext_resource type="Theme" uid="uid://b4h3syf1usohg" path="res://theme.tres" id="1_hvc3h"]
 [ext_resource type="Texture2D" uid="uid://biubr4xhbcwm6" path="res://Graphics/Bg.png" id="1_pqivk"]
 [ext_resource type="PackedScene" uid="uid://bom0j7y5ttd2h" path="res://Scenes/FieldScene.tscn" id="2_i6nkf"]
-[ext_resource type="PackedScene" uid="uid://xmmt1r1up00r" path="res://Scenes/timeline.tscn" id="4_bhfg0"]
 
 [sub_resource type="GDScript" id="GDScript_s2meh"]
 script/source = "extends Node2D
 
-@export var wheatValue : float
+var wheatValue : float
 var bonuscount : float
 var bonuses : Dictionary = {}
 var tools : float
-var buildingsData = preload(\"res://Scripts/buildings.tres\")
+var bonusdatafile = preload(\"res://Scripts/bonusData.tres\")
+var test = preload(\"res://Scripts/buildings.tres\")
 
 
 @onready var bonusprototype = preload(\"res://Scenes/bonus.tscn\")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var buildingsData = buildingsData.data
-	print_debug(buildingsData, buildingsData.size())
+	var bonusdata = bonusdatafile.data
+	var testdata = test.data
+	print_debug(testdata[\"buildings\"], testdata.size())
 	#Instance of the bonus scene and feed it with data from array / node is the bonus button
 	var node
-	for object in buildingsData:
-		var currentObject = buildingsData[object]
-		for i in range(currentObject.size()):
-			var b = currentObject[i]
+	for i in range(testdata[\"buildings\"].size()):
+			var b = testdata[\"buildings\"]
 			node = bonusprototype.instantiate()
 			node.bonusname = b[\"Name\"]
 			node.bonusdesc = b[\"Desc\"]
 			node.price = b[\"Price\"]
 			node.baseprice = node.price
 			node.amount = 0
-			#GENIAL SUPERB
-			node.position.y = (i + ((len(object)-len(\"bonuses\"))*1.5))*96
+			node.position.y = i * 96
 			$Bonuses.add_child(node)
 			bonuses[node.bonusname] = node
 			# function called when signal pressed happend on Button Node
 			# to make separate functions for bonuses, check for buttonname
 			node.get_node(\"Button\").connect(\"pressed\", bonuspurchase.bind(node))
 	pass
-
-
 
 func _input(event):
 	var fieldClick = $FieldArea.get_node(\"Field\")
@@ -69,16 +65,14 @@ func _process(delta):
 	wheatValue += wheatPerSec*delta
 	$WheatValue.text = thousandsFrom(wheatValue) + \" wheat\"
 	$HarvestSpeed.text = str(decimalsFrom(wheatPerSec), \" / sec\")
-	$Quota/Val.text = str($Timeline.demonQuota)
 	pass
-
-
-func manualHarvesting():
+	
+func manualHarvesting() -> float:
 	var harvester = bonuses[\"Harvester\"].amount
 	var harvested = 0.0
 	var baseClick = 1.0
-	wheatValue += baseClick
-
+	harvested = baseClick
+	return harvested
 
 func autoHarvesting() -> float:
 	var fieldworker = bonuses[\"Field Worker\"].amount
@@ -87,7 +81,7 @@ func autoHarvesting() -> float:
 	# combined wheat per second 1.05 = 5% adding bonus: *pow(1.05,bettertools)
 	var wheatPerSec = (fieldworker*0.5+harvester)
 	return wheatPerSec
-
+	
 
 # Oleh's magic
 func thousandsFrom(val) -> String:
@@ -99,8 +93,7 @@ func thousandsFrom(val) -> String:
 	p.append(str(v))
 	p.reverse()
 	return \",\".join(p)
-
-
+	
 #Format string \"1.25 wheat / sec\"
 func decimalsFrom(number) -> String:
 	var format_string = \"%*.*f\"
@@ -165,13 +158,13 @@ metadata/_edit_use_anchors_ = true
 [node name="Quota" type="Label" parent="."]
 offset_left = 643.0
 offset_top = 64.0
-offset_right = 832.0
+offset_right = 947.0
 offset_bottom = 106.0
 theme = ExtResource("1_hvc3h")
 theme_override_font_sizes/font_size = 24
 text = "Demons quota:"
 
-[node name="Val" type="Label" parent="Quota"]
+[node name="Label" type="Label" parent="Quota"]
 layout_mode = 0
 offset_left = 194.0
 offset_right = 245.0
@@ -183,6 +176,3 @@ text = "100
 
 [node name="FieldArea" parent="." instance=ExtResource("2_i6nkf")]
 position = Vector2(107, 247)
-
-[node name="Timeline" parent="." instance=ExtResource("4_bhfg0")]
-position = Vector2(80, 848)
