@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var demonCallTime : float = 12
-var speed : float = 5.0
+var speed : float = 1.0
 var demonsPresented : bool
 var waveAmount : float = 0
 var maxProgress = 12

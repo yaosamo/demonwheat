@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://xmmt1r1up00r"]
 
-[ext_resource type="Script" path="res://Scenes/timeline.gd" id="1_knsao"]
+[ext_resource type="Script" path="res://Scripts/timeline.gd" id="1_knsao"]
 [ext_resource type="Theme" uid="uid://b4h3syf1usohg" path="res://theme.tres" id="1_nfvnf"]
 [ext_resource type="Texture2D" uid="uid://n7obiibjqldp" path="res://Graphics/Timeline@2x.png" id="3_4285u"]
 [ext_resource type="Texture2D" uid="uid://ccg6ri6ptvvag" path="res://Graphics/DemonIcon@2x.png" id="4_8fbct"]

@@ -144,7 +144,7 @@ position = Vector2(-576.779, 15.1784)
 texture = ExtResource("3_y32we")
 
 [node name="Bonuses" type="Node2D" parent="."]
-position = Vector2(1160, 305)
+position = Vector2(1160, 201)
 
 [node name="ReferenceRect" type="ReferenceRect" parent="Bonuses"]
 offset_left = -2.0

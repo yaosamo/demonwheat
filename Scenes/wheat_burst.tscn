@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://bffwwtpwr7jp"]
 
-[ext_resource type="Script" path="res://Scenes/wheat_burst.gd" id="1_m7fmv"]
+[ext_resource type="Script" path="res://Scripts/wheat_burst.gd" id="1_m7fmv"]
 [ext_resource type="Texture2D" uid="uid://c5os0arquo480" path="res://Graphics/single-wheat.png" id="1_w33m0"]
 [ext_resource type="Script" path="res://Scripts/Particles.gd" id="2_6od33"]
 [ext_resource type="Script" path="res://Scripts/Tinyparticles.gd" id="2_voq5y"]
