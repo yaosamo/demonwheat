@@ -1,8 +1,12 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://b4h3syf1usohg"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://b4h3syf1usohg"]
 
 [ext_resource type="StyleBox" uid="uid://b4mqrkc41685i" path="res://Graphics/rounded-button.tres" id="1_duphl"]
+[ext_resource type="FontFile" uid="uid://dqub2pnms6mvi" path="res://Inter-Regular.ttf" id="2_d18uv"]
 
 [resource]
-default_font_size = 30
-Label/colors/font_color = Color(0, 0, 0, 1)
+default_font = ExtResource("2_d18uv")
+default_font_size = 16
+Label/colors/font_color = Color(0.258824, 0.207843, 0.172549, 1)
+Label/constants/line_spacing = 1
+Label/font_sizes/font_size = 16
 Panel/styles/panel = ExtResource("1_duphl")

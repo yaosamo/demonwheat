@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://s42ncte8qsml"]
+[gd_scene load_steps=6 format=3 uid="uid://s42ncte8qsml"]
 
 [ext_resource type="Script" path="res://Scripts/bonus.gd" id="1_q5oa3"]
 [ext_resource type="Theme" uid="uid://b4h3syf1usohg" path="res://theme.tres" id="2_xo04x"]
+[ext_resource type="Texture2D" uid="uid://r1s30pggiitk" path="res://Graphics/currencyIcon@2x.png" id="3_4ani4"]
+[ext_resource type="Texture2D" uid="uid://baib1hvos062y" path="res://Graphics/buildingsIcons/fieldWorker@2x.png" id="4_881sv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2p7t1"]
 bg_color = Color(0.972549, 0.917647, 0.772549, 1)
@@ -12,53 +14,42 @@ corner_radius_bottom_left = 8
 
 [node name="Buildings" type="Node2D"]
 script = ExtResource("1_q5oa3")
-bonusname = "Name"
+bonusname = "Building"
+bonusdesc = "Harvest 1.5 wheat per second but reduces field worker production by 10%"
 price = 100
 amount = 2
+buttonH = null
+buttonW = null
 
 [node name="Button" type="Button" parent="."]
 offset_right = 550.0
 offset_bottom = 88.0
 theme = ExtResource("2_xo04x")
 theme_override_styles/normal = SubResource("StyleBoxFlat_2p7t1")
-
-[node name="Button33" type="TextureButton" parent="."]
-visible = false
-offset_right = 656.0
-offset_bottom = 104.0
-theme = ExtResource("2_xo04x")
-ignore_texture_size = true
-stretch_mode = 0
+metadata/_edit_use_anchors_ = true
 
 [node name="Title" type="Label" parent="."]
-offset_left = 128.0
-offset_top = 15.0
-offset_right = 208.0
-offset_bottom = 42.0
+offset_left = 88.0
+offset_top = 14.0
+offset_right = 168.0
+offset_bottom = 41.0
 size_flags_vertical = 1
 theme = ExtResource("2_xo04x")
 theme_override_font_sizes/font_size = 18
-text = "Name"
+text = "Building"
 
 [node name="Amount" type="Label" parent="."]
-offset_left = 3.0
-offset_top = 2.0
-offset_right = 19.0
-offset_bottom = 28.0
+offset_left = 56.0
+offset_top = 48.0
+offset_right = 72.0
+offset_bottom = 74.0
 size_flags_vertical = 1
 theme = ExtResource("2_xo04x")
 theme_override_font_sizes/font_size = 18
 text = "2"
-
-[node name="Price" type="Label" parent="."]
-visible = false
-offset_left = 808.0
-offset_top = 32.0
-offset_right = 832.0
-offset_bottom = 74.0
-size_flags_horizontal = 6
-theme = ExtResource("2_xo04x")
-text = "$"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="PriceValue" type="Label" parent="."]
 offset_left = 483.0
@@ -69,11 +60,24 @@ size_flags_horizontal = 6
 theme = ExtResource("2_xo04x")
 theme_override_font_sizes/font_size = 28
 text = "100"
+metadata/_edit_use_anchors_ = true
+
+[node name="CurrencyIcon_2x" type="Sprite2D" parent="PriceValue"]
+position = Vector2(-15, 17)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_4ani4")
 
 [node name="Desc" type="Label" parent="."]
-offset_left = 128.0
-offset_top = 49.0
-offset_right = 568.0
-offset_bottom = 72.0
+offset_left = 88.0
+offset_top = 45.0
+offset_right = 464.0
+offset_bottom = 86.0
 theme = ExtResource("2_xo04x")
 theme_override_font_sizes/font_size = 16
+text = "Harvest 1.5 wheat per second but reduces field worker production by 10%"
+autowrap_mode = 3
+
+[node name="FieldWorker_2x" type="Sprite2D" parent="."]
+position = Vector2(40, 40)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_881sv")

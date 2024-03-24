@@ -16,11 +16,8 @@ var bonuses : Dictionary = {}
 var tools : float
 var buildingsData = preload(\"res://Scripts/buildings.tres\")
 @export var bonusPadding = 16
-@export var buildingPadding = 8
-@export var buildingH = 88
-@export var buildingW = 550
-@export var bonusH = 150
-@export var bonusW = 267
+@export var buildingPadding = 16
+@export var buildingButtonsHeight = 88
 
 @onready var bonusprototype = {\"buildings\": preload(\"res://Scenes/buildings.tscn\"), \"bonuses\": preload(\"res://Scenes/bonuses.tscn\")}
 
@@ -47,24 +44,18 @@ func _ready():
 			node.price = b[\"Price\"]
 			node.baseprice = node.price
 			node.amount = 0
-			# moves bonuses down to upgrades and set padding
-			if object == \"bonuses\":
-				node.position.y += 540
-				node.position.x = i * (bonusW + bonusPadding)
-				node.buttonH = bonusH
-				node.buttonW = bonusW
-			else:
-				node.position.y = i * (buildingH + buildingPadding)
-				node.buttonH = buildingH
-				node.buttonW = buildingW
-			
 			# calculates height of the building
 			var descLenght = len(node.bonusdesc)
 			if descLenght >= 46:
 				var numOfLines = ceil(float(descLenght) / float(46))
-				buildingH += numOfLines*11 
-				node.buttonH = buildingH
-				
+				print_debug(\"Lengh of \", node.bonusname, numOfLines)
+				buildingButtonsHeight += numOfLines*11
+			# moves bonuses down to upgrades and set padding
+			if object == \"bonuses\":
+				node.position.y += 540
+				node.position.x = i * (267+bonusPadding)
+			else:
+				node.position.y = i * (buildingButtonsHeight + buildingPadding)
 			$BonusButtons.add_child(node)
 			bonuses[node.bonusname] = node
 			# function called when signal pressed happend on Button Node

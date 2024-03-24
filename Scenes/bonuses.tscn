@@ -10,70 +10,65 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[node name="Buildings" type="Node2D"]
+[node name="Bonuses" type="Node2D"]
 script = ExtResource("1_7q0s8")
-bonusname = "Name"
+bonusname = "Bonus"
+bonusdesc = "Workers twice as efficient"
 price = 100
 amount = 2
+buttonH = null
+buttonW = null
 
 [node name="Button" type="Button" parent="."]
-offset_right = 224.0
-offset_bottom = 120.0
+offset_right = 267.0
+offset_bottom = 150.0
 theme = ExtResource("2_wi6lb")
 theme_override_styles/normal = SubResource("StyleBoxFlat_2p7t1")
-
-[node name="Button33" type="TextureButton" parent="."]
-visible = false
-offset_right = 656.0
-offset_bottom = 104.0
-theme = ExtResource("2_wi6lb")
-ignore_texture_size = true
-stretch_mode = 0
+metadata/_edit_use_anchors_ = true
 
 [node name="Title" type="Label" parent="."]
-offset_left = 128.0
+offset_left = 24.0
 offset_top = 15.0
-offset_right = 208.0
+offset_right = 104.0
 offset_bottom = 42.0
 size_flags_vertical = 1
 theme = ExtResource("2_wi6lb")
 theme_override_font_sizes/font_size = 18
-text = "Name"
-
-[node name="Amount" type="Label" parent="."]
-offset_left = 3.0
-offset_top = 2.0
-offset_right = 19.0
-offset_bottom = 28.0
-size_flags_vertical = 1
-theme = ExtResource("2_wi6lb")
-theme_override_font_sizes/font_size = 18
-text = "2"
-
-[node name="Price" type="Label" parent="."]
-visible = false
-offset_left = 808.0
-offset_top = 32.0
-offset_right = 832.0
-offset_bottom = 74.0
-size_flags_horizontal = 6
-theme = ExtResource("2_wi6lb")
-text = "$"
+text = "Bonus"
+metadata/_edit_use_anchors_ = true
 
 [node name="PriceValue" type="Label" parent="."]
-offset_left = 32.0
-offset_top = 56.0
-offset_right = 83.0
-offset_bottom = 98.0
+offset_left = 19.0
+offset_top = 96.0
+offset_right = 70.0
+offset_bottom = 138.0
 size_flags_horizontal = 6
 theme = ExtResource("2_wi6lb")
 theme_override_font_sizes/font_size = 28
 text = "100"
+metadata/_edit_use_anchors_ = true
 
 [node name="Desc" type="Label" parent="."]
-offset_left = 128.0
+offset_left = 24.0
 offset_top = 49.0
-offset_right = 200.0
+offset_right = 223.0
 offset_bottom = 72.0
 theme = ExtResource("2_wi6lb")
 theme_override_font_sizes/font_size = 16
+text = "Workers twice as efficient"
+metadata/_edit_use_anchors_ = true
+
+[node name="Amount" type="Label" parent="."]
+auto_translate_mode = 1
+visible = false
+offset_left = 248.0
+offset_top = 16.0
+offset_right = 264.0
+offset_bottom = 42.0
+size_flags_vertical = 1
+theme = ExtResource("2_wi6lb")
+theme_override_font_sizes/font_size = 18
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true

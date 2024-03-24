@@ -7,9 +7,12 @@ extends Node2D
 @export var price: int
 @export var amount : int
 @export var baseprice : int
+@export var buttonH : int
+@export var buttonW : int
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$Button.size = Vector2(buttonW, buttonH)
 	pass # Replace with function body.
 
 

@@ -24,7 +24,11 @@ data = {
 "Name": "Harvester",
 "Price": 50.0
 }, {
-"Desc": "Harvest 1.5 wheat per second. Eat 10% of Field Worker harvest",
+"Desc": "Harvest 2 wheat per second",
+"Name": "Heavy Harvester",
+"Price": 50.0
+}, {
+"Desc": "Harvest 1.5 wheat per second but reduces field worker production by 10% test test test test test test test test hui test test ",
 "Name": "Succubus",
 "Price": 100.0
 }]
