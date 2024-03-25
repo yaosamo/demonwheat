@@ -18,12 +18,8 @@ bonusname = "Building"
 bonusdesc = "Harvest 1.5 wheat per second but reduces field worker production by 10%"
 price = 100
 amount = 2
-buttonH = null
-buttonW = null
 
 [node name="Button" type="Button" parent="."]
-offset_right = 550.0
-offset_bottom = 88.0
 theme = ExtResource("2_xo04x")
 theme_override_styles/normal = SubResource("StyleBoxFlat_2p7t1")
 metadata/_edit_use_anchors_ = true

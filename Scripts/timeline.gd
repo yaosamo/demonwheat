@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var demonCallTime : float = 12
-var speed : float = 1.0
+var speed : float = 0.1
 var demonsPresented : bool
 var waveAmount : float = 0
 var maxProgress = 12
@@ -33,8 +33,8 @@ func _process(delta):
 
 func demonCall():
 	print_debug("wave#:",waveAmount)
-	demonQuota = 100*pow(1.25, waveAmount)
 	$"/root/Main".wheatValue -= demonQuota
+	demonQuota = 100*pow(1.25, waveAmount)
 	print_debug("hello I am a demon")
 	demonsPresented = false
 	$DemonIcon.position.x = maxProgress
