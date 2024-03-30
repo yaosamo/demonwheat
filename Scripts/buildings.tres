@@ -5,14 +5,18 @@ data = {
 "bonuses": [{
 "Desc": "Workers twice as efficient",
 "Name": "Sprinkler",
-"Price": 150.0
+"Price": 1000.0
 }, {
-"Desc": "5% discount on purchases",
+"Desc": "Speed up harvesting by 10%",
 "Name": "Solar Panels",
 "Price": 150.0
 }, {
-"Desc": "Research harvesting and demons",
-"Name": "Research Lab",
+"Desc": "Harveting is now faster by 10%",
+"Name": "Improved tools",
+"Price": 150.0
+},{
+"Desc": "Harveting is now faster by 10%",
+"Name": "Improved tools",
 "Price": 150.0
 }],
 "buildings": [{
