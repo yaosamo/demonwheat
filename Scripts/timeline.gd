@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var demonCallTime : float = 12
-var speed : float = 0.1
+var speed : float = 3
 var demonsPresented : bool
 var waveAmount : float = 0
 var maxProgress = 12
@@ -28,7 +28,10 @@ func _process(delta):
 		# Basically pow function to increase progress
 		maxProgress *= 1.25
 		demonCallTime = maxProgress
-	pass
+	if demonCallTime <= 1 and !$demonsMus.playing:
+		#$"/root/Main/BgMusic".stop()
+		$demonsMus.play()
+		pass
 
 
 func demonCall():

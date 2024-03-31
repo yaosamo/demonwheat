@@ -241,7 +241,8 @@ position = Vector2(80, 848)
 
 [node name="BgMusic" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_em6ej")
-autoplay = true
+volume_db = -10.0
 
 [node name="vshik" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_qqqaa")
+volume_db = -10.0
