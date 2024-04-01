@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://hbb3ogsmmj05"]
+
+[ext_resource type="StyleBox" uid="uid://27f41n6ctu6m" path="res://demon_appBG.tres" id="1_1rlgj"]
+
+[node name="DemonAppearance" type="Node2D"]
+
+[node name="bg" type="Button" parent="."]
+offset_right = 338.0
+offset_bottom = 390.0
+theme_override_styles/focus = ExtResource("1_1rlgj")
+theme_override_styles/disabled = ExtResource("1_1rlgj")
+theme_override_styles/normal = ExtResource("1_1rlgj")
+disabled = true
+button_mask = 0
+
+[node name="PayQ" type="Button" parent="."]
+offset_left = 48.0
+offset_top = 256.0
+offset_right = 280.0
+offset_bottom = 328.0
+text = "Pay"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://xmmt1r1up00r"]
+[gd_scene load_steps=7 format=3 uid="uid://xmmt1r1up00r"]
 
 [ext_resource type="Script" path="res://Scripts/timeline.gd" id="1_knsao"]
 [ext_resource type="Theme" uid="uid://b4h3syf1usohg" path="res://theme.tres" id="1_nfvnf"]
@@ -6,20 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://ccg6ri6ptvvag" path="res://Graphics/DemonIcon@2x.png" id="4_8fbct"]
 [ext_resource type="AudioStream" uid="uid://s5et63oa7lef" path="res://Sounds/demons.mp3" id="5_7vb1x"]
 [ext_resource type="StyleBox" uid="uid://27f41n6ctu6m" path="res://demon_appBG.tres" id="6_4nhx4"]
-
-[sub_resource type="GDScript" id="GDScript_11wq0"]
-script/source = "extends Button
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-"
 
 [node name="Timeline" type="Node2D"]
 script = ExtResource("1_knsao")
@@ -83,7 +69,4 @@ offset_top = 256.0
 offset_right = 280.0
 offset_bottom = 328.0
 text = "Pay"
-script = SubResource("GDScript_11wq0")
 metadata/_edit_use_anchors_ = true
-
-[connection signal="pressed" from="DemAppear/payQ" to="." method="_on_pay_q_pressed"]

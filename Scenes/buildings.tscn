@@ -3,14 +3,8 @@
 [ext_resource type="Script" path="res://Scripts/bonus.gd" id="1_q5oa3"]
 [ext_resource type="Theme" uid="uid://b4h3syf1usohg" path="res://theme.tres" id="2_xo04x"]
 [ext_resource type="Texture2D" uid="uid://r1s30pggiitk" path="res://Graphics/currencyIcon@2x.png" id="3_4ani4"]
+[ext_resource type="StyleBox" uid="uid://dlafx4jltscvm" path="res://bonusBG.tres" id="3_lxeon"]
 [ext_resource type="Texture2D" uid="uid://baib1hvos062y" path="res://Graphics/buildingsIcons/fieldWorker@2x.png" id="4_881sv"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2p7t1"]
-bg_color = Color(0.972549, 0.917647, 0.772549, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
 
 [node name="Buildings" type="Node2D"]
 script = ExtResource("1_q5oa3")
@@ -21,7 +15,7 @@ amount = 2
 
 [node name="Button" type="Button" parent="."]
 theme = ExtResource("2_xo04x")
-theme_override_styles/normal = SubResource("StyleBoxFlat_2p7t1")
+theme_override_styles/normal = ExtResource("3_lxeon")
 metadata/_edit_use_anchors_ = true
 
 [node name="Title" type="Label" parent="."]
@@ -33,6 +27,7 @@ size_flags_vertical = 1
 theme = ExtResource("2_xo04x")
 theme_override_font_sizes/font_size = 18
 text = "Building"
+metadata/_edit_use_anchors_ = true
 
 [node name="Amount" type="Label" parent="."]
 offset_left = 56.0
@@ -72,6 +67,7 @@ theme = ExtResource("2_xo04x")
 theme_override_font_sizes/font_size = 16
 text = "Harvest 1.5 wheat per second but reduces field worker production by 10%"
 autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
 
 [node name="FieldWorker_2x" type="Sprite2D" parent="."]
 position = Vector2(40, 40)
