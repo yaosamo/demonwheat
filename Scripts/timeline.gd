@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var demonCallTime : float = 12
-var speed : float = 0.1
+var speed : float = 1
 var demonsPresented : bool
 var waveAmount : float = 0
 var maxProgress = 12
@@ -13,7 +13,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	
+
 	if !demonsPresented:
 		# Timer
 		demonCallTime -= speed*delta
@@ -26,8 +26,14 @@ func _process(delta):
 	if demonCallTime <= 0 and !demonsPresented:
 		$timerLabel.text = "Demons are coming"
 		demonCall()
+		
+	if demonsPresented and $DemAppear/ProgressBar.value < 100:
+		$DemAppear/ProgressBar.value += 0.1 
 	
-	if demonCallTime <= 10 and !$demonsMus.playing:
+	if $DemAppear/ProgressBar.value >= 100 and !paid:
+		death()
+	
+	if demonCallTime <= 11 and !$demonsMus.playing:
 		$"/root/Main/BgMusic".stop()
 		$demonsMus.play()
 		pass
@@ -40,12 +46,9 @@ func demonCall():
 	demonsPresented = true
 	print_debug("hello I am a demon")
 	
-	var lastCallTimer = 0
-	if lastCallTimer <= 0 and !paid:
-		death()
-	
 	
 func death():
+	print_debug("You're dead")
 	pass
 
 

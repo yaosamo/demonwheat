@@ -86,7 +86,6 @@ func _input(event):
 		if event.button_index == 1:
 			if fieldClick.get_rect().has_point(fieldClick.to_local(mouse_position)):
 				if event.pressed:
-					print(\"Manually Harvested\")
 					#Animation on press
 					fieldClick.pressed()
 					manualHarvesting()
@@ -95,7 +94,6 @@ func _input(event):
 				elif event.is_released:
 					#Animation on release
 					fieldClick.released()
-					print(\"released\")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -112,6 +110,7 @@ func _process(delta):
 func manualHarvesting():
 	var baseClick = 1.0
 	wheatValue += baseClick
+	print(\"Manually Harvested\")
 
 
 func autoHarvesting() -> float:

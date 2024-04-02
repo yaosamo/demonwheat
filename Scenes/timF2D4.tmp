@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://xmmt1r1up00r"]
+[gd_scene load_steps=11 format=3 uid="uid://xmmt1r1up00r"]
 
 [ext_resource type="Script" path="res://Scripts/timeline.gd" id="1_knsao"]
 [ext_resource type="Theme" uid="uid://b4h3syf1usohg" path="res://theme.tres" id="1_nfvnf"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ccg6ri6ptvvag" path="res://Graphics/DemonIcon@2x.png" id="4_8fbct"]
 [ext_resource type="AudioStream" uid="uid://s5et63oa7lef" path="res://Sounds/demons.mp3" id="5_7vb1x"]
 [ext_resource type="StyleBox" uid="uid://27f41n6ctu6m" path="res://demon_appBG.tres" id="6_4nhx4"]
+[ext_resource type="Script" path="res://Scenes/canvas_layer.gd" id="7_wrb45"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_voxxt"]
 bg_color = Color(0, 0, 0, 1)
@@ -20,6 +21,23 @@ script/source = "extends Button
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[sub_resource type="GDScript" id="GDScript_p272s"]
+script/source = "extends Control
+var progress: float = 0.5
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	draw_rect(Rect2(Vector2(0, 0), Vector2(get_size().x * progress, get_size().y)), Color(0.2, 0.6, 0.9))
+	
 	pass # Replace with function body.
 
 
@@ -110,19 +128,23 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 40
 text = "12,000 w"
 
-[node name="ProgressBar" type="ProgressBar" parent="DemAppear"]
-offset_left = 40.0
+[node name="LastTimer" type="Control" parent="DemAppear"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 48.0
 offset_top = 344.0
-offset_right = 304.0
-offset_bottom = 360.0
-fill_mode = 1
-show_percentage = false
+offset_right = 288.0
+offset_bottom = 368.0
+script = SubResource("GDScript_p272s")
 
-[node name="LabelTimer" type="Label" parent="DemAppear"]
-offset_left = 40.0
-offset_top = 312.0
-offset_right = 135.0
-offset_bottom = 335.0
+[node name="CanvasLayer" type="CanvasLayer" parent="DemAppear/LastTimer"]
+script = ExtResource("7_wrb45")
+
+[node name="LabelTimer" type="Label" parent="DemAppear/LastTimer"]
+offset_left = -8.0
+offset_top = -32.0
+offset_right = 87.0
+offset_bottom = -9.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Give up in..3"
 
