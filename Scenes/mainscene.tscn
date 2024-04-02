@@ -153,7 +153,6 @@ func bonuspurchase(node):
 		print(\"Bonus added: \", node.amount)
 	pass
 
-
 "
 
 [node name="Main" type="Node2D"]

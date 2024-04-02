@@ -1,7 +1,9 @@
 extends Node2D
+# scene for gameover
+@export var game_over_scene : PackedScene
 
 @export var demonCallTime : float = 12
-var speed : float = 1
+var speed : float = 2
 var demonsPresented : bool
 var waveAmount : float = 0
 var maxProgress = 12
@@ -9,6 +11,7 @@ var paid = false
 @export var demonQuota : int = 100
 
 func _ready():
+	
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -28,13 +31,14 @@ func _process(delta):
 		demonCall()
 		
 	if demonsPresented and $DemAppear/ProgressBar.value < 100:
-		$DemAppear/ProgressBar.value += 0.1 
+		$DemAppear/ProgressBar.value += 1
 	
 	if $DemAppear/ProgressBar.value >= 100 and !paid:
 		death()
+
 	
-	if demonCallTime <= 11 and !$demonsMus.playing:
-		$"/root/Main/BgMusic".stop()
+	if demonCallTime <= 4 and !$demonsMus.playing:
+		#$"/root/Main/BgMusic".stop()
 		$demonsMus.play()
 		pass
 
@@ -49,6 +53,8 @@ func demonCall():
 	
 func death():
 	print_debug("You're dead")
+	$DemAppear.visible = false
+	game_over()
 	pass
 
 
@@ -57,6 +63,7 @@ func _on_pay_q_pressed() -> void:
 	print_debug("paid")
 	paid = true
 	demonsPresented = false
+	$DemAppear/ProgressBar.value = 0
 	$DemAppear.visible = false
 	$demonsMus.stop()
 	startNextWave()
@@ -71,7 +78,13 @@ func startNextWave():
 	demonQuota = 100*pow(1.25, waveAmount)
 	# deadline
 	maxProgress *= 1.25
+	paid = false
 	demonCallTime = maxProgress
 	# move to starting point
 	$DemonIcon.position.x = maxProgress
 	$"/root/Main/BgMusic".play()
+	
+	
+func game_over():
+	var ERR = get_tree().change_scene_to_packed(game_over_scene)
+	pass

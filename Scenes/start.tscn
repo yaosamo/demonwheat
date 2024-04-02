@@ -1,22 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://b7pcjpk7ybqe1"]
+[gd_scene load_steps=7 format=3 uid="uid://b7pcjpk7ybqe1"]
 
 [ext_resource type="Script" path="res://Scripts/start.gd" id="1_45p6u"]
 [ext_resource type="PackedScene" uid="uid://570hps3njcqy" path="res://Scenes/mainscene.tscn" id="2_7xdae"]
 [ext_resource type="Theme" uid="uid://b4h3syf1usohg" path="res://theme.tres" id="3_n0hte"]
-
-[sub_resource type="GDScript" id="GDScript_pv35a"]
-script/source = "extends Label
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-"
 
 [sub_resource type="Animation" id="Animation_u6hhc"]
 length = 0.001
@@ -102,7 +88,6 @@ theme = ExtResource("3_n0hte")
 theme_override_font_sizes/font_size = 40
 text = "Start
 "
-script = SubResource("GDScript_pv35a")
 metadata/_edit_use_anchors_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
