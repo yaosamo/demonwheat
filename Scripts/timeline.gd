@@ -38,7 +38,7 @@ func _process(delta):
 
 	
 	if demonCallTime <= 4 and !$demonsMus.playing:
-		#$"/root/Main/BgMusic".stop()
+		$"/root/Main/BgMusic".stop()
 		$demonsMus.play()
 		pass
 
