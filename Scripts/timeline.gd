@@ -26,6 +26,11 @@ func _process(delta):
 		$DemonIcon.position.x = lerp(27, 818, currentProgress)
 		$timerLabel.text = str(ceil(demonCallTime), " months til demons")
 		
+	if demonCallTime <= 4 and !$demonsMus.playing:
+		$"/root/Main/BgMusic".stop() 
+		$demonsMus.play()
+		pass
+		
 	if demonCallTime <= 0 and !demonsPresented:
 		$timerLabel.text = "Demons are coming"
 		demonCall()
@@ -35,12 +40,6 @@ func _process(delta):
 	
 	if $DemAppear/ProgressBar.value >= 100 and !paid:
 		death()
-
-	
-	if demonCallTime <= 4 and !$demonsMus.playing:
-		$"/root/Main/BgMusic".stop()
-		$demonsMus.play()
-		pass
 
 
 
@@ -54,7 +53,7 @@ func demonCall():
 func death():
 	print_debug("You're dead")
 	$DemAppear.visible = false
-	game_over()
+	var ERR = get_tree().change_scene_to_packed(game_over_scene)
 	pass
 
 
@@ -83,8 +82,4 @@ func startNextWave():
 	# move to starting point
 	$DemonIcon.position.x = maxProgress
 	$"/root/Main/BgMusic".play()
-	
-	
-func game_over():
-	var ERR = get_tree().change_scene_to_packed(game_over_scene)
-	pass
+
