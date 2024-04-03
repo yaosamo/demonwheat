@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://xmmt1r1up00r"]
+[gd_scene load_steps=13 format=3 uid="uid://xmmt1r1up00r"]
 
 [ext_resource type="Script" path="res://Scripts/timeline.gd" id="1_knsao"]
 [ext_resource type="Theme" uid="uid://b4h3syf1usohg" path="res://theme.tres" id="1_nfvnf"]
@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://ccg6ri6ptvvag" path="res://Graphics/DemonIcon@2x.png" id="4_8fbct"]
 [ext_resource type="AudioStream" uid="uid://s5et63oa7lef" path="res://Sounds/demons.mp3" id="5_7vb1x"]
 [ext_resource type="StyleBox" uid="uid://27f41n6ctu6m" path="res://demon_appBG.tres" id="6_4nhx4"]
+[ext_resource type="FontFile" uid="uid://6itpgf18f3a8" path="res://fonts/InknutAntiqua-Regular.ttf" id="8_7ch7x"]
+[ext_resource type="Texture2D" uid="uid://cg3l6biqxac6n" path="res://Graphics/miniDemon@2x.png" id="8_l8e1k"]
+[ext_resource type="FontFile" uid="uid://bkkgassk31pox" path="res://fonts/InknutAntiqua-Bold.ttf" id="9_v0ruc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_voxxt"]
 bg_color = Color(0, 0, 0, 1)
@@ -70,7 +73,6 @@ stream = ExtResource("5_7vb1x")
 volume_db = -10.0
 
 [node name="DemAppear" type="Node2D" parent="."]
-visible = false
 position = Vector2(8, -416)
 
 [node name="bg" type="Button" parent="DemAppear"]
@@ -87,29 +89,33 @@ metadata/_edit_use_anchors_ = true
 [node name="payQ" type="Button" parent="DemAppear"]
 auto_translate_mode = 1
 offset_left = 40.0
-offset_top = 224.0
+offset_top = 198.0
 offset_right = 300.0
-offset_bottom = 296.0
+offset_bottom = 270.0
+theme_override_fonts/font = ExtResource("8_7ch7x")
+theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_voxxt")
 text = "Pay"
 script = SubResource("GDScript_11wq0")
 
-[node name="Label" type="Label" parent="DemAppear"]
+[node name="quotaText" type="Label" parent="DemAppear"]
 offset_left = 40.0
-offset_top = 112.0
+offset_top = 64.0
 offset_right = 264.0
-offset_bottom = 152.0
+offset_bottom = 127.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_7ch7x")
 theme_override_font_sizes/font_size = 24
 text = "The quota is
 "
 
-[node name="LabelVal" type="Label" parent="DemAppear"]
+[node name="quotaValue" type="Label" parent="DemAppear"]
 offset_left = 40.0
-offset_top = 144.0
-offset_right = 209.0
-offset_bottom = 199.0
+offset_top = 88.0
+offset_right = 243.0
+offset_bottom = 193.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_v0ruc")
 theme_override_font_sizes/font_size = 40
 text = "12,000 w"
 
@@ -123,10 +129,27 @@ show_percentage = false
 
 [node name="LabelTimer" type="Label" parent="DemAppear"]
 offset_left = 40.0
-offset_top = 312.0
-offset_right = 135.0
-offset_bottom = 335.0
+offset_top = 288.0
+offset_right = 150.0
+offset_bottom = 331.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_7ch7x")
 text = "Give up in..3"
+
+[node name="MiniDemon_2x" type="Sprite2D" parent="DemAppear"]
+position = Vector2(64, 6)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_l8e1k")
+
+[node name="talk" type="Label" parent="DemAppear"]
+offset_left = 104.0
+offset_top = -10.0
+offset_right = 320.0
+offset_bottom = 53.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_7ch7x")
+theme_override_font_sizes/font_size = 24
+text = "Text
+"
 
 [connection signal="pressed" from="DemAppear/payQ" to="." method="_on_pay_q_pressed"]

@@ -1,0 +1,6 @@
+[gd_resource type="JSON" format=3 uid="uid://b2wvw5263nhwu"]
+
+[resource]
+data = {
+"dialogues": ["Sharing is caring.", "Are you ready?", "Let’s make it quick.", "Knock knock, haha.", "Yum yum.", "I know, I know.", "Open up.", "What’s in your pockets?", "Don’t even try.", "See you next time.", "We’re hungry.", "Know your place.", "I hate my job.", "I hate to do this, but...", "It’s just business.", "Hey, calm down and pay.", "Chill, chill.", "I will not be eating dog food tonight.", "Don’t make our boss mad.", "It’s not easy for me either.", "How are your kids?", "How is Emma?", "Heard the news?", "You can’t win stupid."]
+}

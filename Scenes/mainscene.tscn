@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://570hps3njcqy"]
+[gd_scene load_steps=11 format=3 uid="uid://570hps3njcqy"]
 
 [ext_resource type="Theme" uid="uid://b4h3syf1usohg" path="res://theme.tres" id="1_hvc3h"]
 [ext_resource type="Texture2D" uid="uid://csvsy3b0r3bvc" path="res://Graphics/Bonuses-bg@2x.png" id="1_i0gax"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://sdkpqv0k4px6" path="res://Graphics/Buildings-title@2x.png" id="3_y32we"]
 [ext_resource type="PackedScene" uid="uid://xmmt1r1up00r" path="res://Scenes/timeline.tscn" id="4_bhfg0"]
 [ext_resource type="FontFile" uid="uid://tb7p0lrnu6ob" path="res://Inter-SemiBold.ttf" id="5_yfomq"]
-[ext_resource type="Texture2D" uid="uid://ccg6ri6ptvvag" path="res://Graphics/DemonIcon@2x.png" id="6_bvxrj"]
 [ext_resource type="AudioStream" uid="uid://bmi18jpdsojlg" path="res://Sounds/bg.mp3" id="9_em6ej"]
 [ext_resource type="AudioStream" uid="uid://bo0jr3h20u2ge" path="res://Sounds/vshik.mp3" id="10_qqqaa"]
 
@@ -103,7 +102,6 @@ func _process(delta):
 	wheatValue += wheatPerSec*delta
 	$WheatValue.text = thousandsFrom(wheatValue) + \" wheat\"
 	$HarvestSpeed.text = str(decimalsFrom(wheatPerSec), \" / sec\")
-	$Quota/Val.text = str($Timeline.demonQuota)
 	pass
 
 
@@ -204,31 +202,6 @@ theme_override_font_sizes/font_size = 24
 text = "1.2 / sec
 "
 metadata/_edit_use_anchors_ = true
-
-[node name="Quota" type="Label" parent="."]
-offset_left = 643.0
-offset_top = 64.0
-offset_right = 832.0
-offset_bottom = 96.0
-theme = ExtResource("1_hvc3h")
-theme_override_font_sizes/font_size = 24
-text = "Demons quota:"
-
-[node name="Val" type="Label" parent="Quota"]
-layout_mode = 0
-offset_left = 181.0
-offset_top = 1.0
-offset_right = 232.0
-offset_bottom = 33.0
-theme = ExtResource("1_hvc3h")
-theme_override_font_sizes/font_size = 24
-text = "100
-"
-
-[node name="DemonIcon_2x" type="Sprite2D" parent="Quota"]
-position = Vector2(-22, 13)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("6_bvxrj")
 
 [node name="FieldArea" parent="." instance=ExtResource("2_i6nkf")]
 position = Vector2(107, 247)

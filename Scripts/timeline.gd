@@ -9,13 +9,16 @@ var waveAmount : float = 0
 var maxProgress = 12
 var paid = false
 @export var demonQuota : int = 100
+var demonTalk = preload("res://Scripts/demontalk.tres")
 
 func _ready():
-	
+	for talk in demonTalk.data["dialogues"]:
+		$DemAppear/talk.text = talk
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	$DemAppear/quotaValue.text = str(demonQuota, " wheat")
 
 	if !demonsPresented:
 		# Timer
@@ -66,7 +69,7 @@ func _on_pay_q_pressed() -> void:
 	$DemAppear.visible = false
 	$demonsMus.stop()
 	startNextWave()
-	pass # Replace with function body.
+	pass 
 
 
 func startNextWave():
