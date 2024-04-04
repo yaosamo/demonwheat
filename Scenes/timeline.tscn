@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://xmmt1r1up00r"]
+[gd_scene load_steps=15 format=3 uid="uid://xmmt1r1up00r"]
 
 [ext_resource type="Script" path="res://Scripts/timeline.gd" id="1_knsao"]
 [ext_resource type="Theme" uid="uid://b4h3syf1usohg" path="res://theme.tres" id="1_nfvnf"]
@@ -18,19 +18,32 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="GDScript" id="GDScript_11wq0"]
-script/source = "extends Button
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oa1bj"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n4ip4"]
+bg_color = Color(0.882353, 0.827451, 0.694118, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-"
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_biepn"]
 
 [node name="Timeline" type="Node2D"]
 script = ExtResource("1_knsao")
@@ -73,6 +86,7 @@ stream = ExtResource("5_7vb1x")
 volume_db = -10.0
 
 [node name="DemAppear" type="Node2D" parent="."]
+visible = false
 position = Vector2(8, -416)
 
 [node name="bg" type="Button" parent="DemAppear"]
@@ -92,11 +106,11 @@ offset_left = 40.0
 offset_top = 198.0
 offset_right = 300.0
 offset_bottom = 270.0
+theme_override_colors/font_color = Color(0.882353, 0.827451, 0.694118, 1)
 theme_override_fonts/font = ExtResource("8_7ch7x")
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_voxxt")
 text = "Pay"
-script = SubResource("GDScript_11wq0")
 
 [node name="quotaText" type="Label" parent="DemAppear"]
 offset_left = 40.0
@@ -111,23 +125,25 @@ text = "The quota is
 
 [node name="quotaValue" type="Label" parent="DemAppear"]
 offset_left = 40.0
-offset_top = 88.0
-offset_right = 243.0
-offset_bottom = 193.0
+offset_top = 91.0
+offset_right = 308.0
+offset_bottom = 175.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("9_v0ruc")
-theme_override_font_sizes/font_size = 40
-text = "12,000 w"
+theme_override_font_sizes/font_size = 32
+text = "120,000 wheat"
 
 [node name="ProgressBar" type="ProgressBar" parent="DemAppear"]
 offset_left = 40.0
-offset_top = 344.0
+offset_top = 341.0
 offset_right = 304.0
-offset_bottom = 360.0
+offset_bottom = 357.0
+theme_override_styles/background = SubResource("StyleBoxFlat_oa1bj")
+theme_override_styles/fill = SubResource("StyleBoxFlat_n4ip4")
 fill_mode = 1
 show_percentage = false
 
-[node name="LabelTimer" type="Label" parent="DemAppear"]
+[node name="lastTimerLabel" type="Label" parent="DemAppear"]
 offset_left = 40.0
 offset_top = 288.0
 offset_right = 150.0
@@ -151,5 +167,12 @@ theme_override_fonts/font = ExtResource("8_7ch7x")
 theme_override_font_sizes/font_size = 24
 text = "Text
 "
+
+[node name="TextureRect" type="TextureRect" parent="DemAppear"]
+material = SubResource("ShaderMaterial_biepn")
+offset_left = 96.0
+offset_top = -16.0
+offset_right = 184.0
+offset_bottom = 56.0
 
 [connection signal="pressed" from="DemAppear/payQ" to="." method="_on_pay_q_pressed"]

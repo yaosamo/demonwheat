@@ -8,6 +8,7 @@ var demonsPresented : bool
 var waveAmount : float = 0
 var maxProgress = 12
 var paid = false
+var secondTimer = 5
 @export var demonQuota : int = 100
 var demonTalk = preload("res://Scripts/demontalk.tres")
 
@@ -18,6 +19,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	# on demons popup wheat quota
 	$DemAppear/quotaValue.text = str(demonQuota, " wheat")
 
 	if !demonsPresented:
@@ -28,7 +30,8 @@ func _process(delta):
 		# Maybe add vector point to get it's position as final point
 		$DemonIcon.position.x = lerp(27, 818, currentProgress)
 		$timerLabel.text = str(ceil(demonCallTime), " months til demons")
-		
+	
+	#music stop and play when demons arrive	
 	if demonCallTime <= 4 and !$demonsMus.playing:
 		$"/root/Main/BgMusic".stop() 
 		$demonsMus.play()
@@ -39,8 +42,10 @@ func _process(delta):
 		demonCall()
 		
 	if demonsPresented and $DemAppear/ProgressBar.value < 100:
-		$DemAppear/ProgressBar.value += 1
-	
+		#100/second timer gives me step step to achieve desired seconds (5 for example) 100/5 = 20*delta therefore 5 sec to 100 
+		$DemAppear/ProgressBar.value += (100/secondTimer)*delta
+		$DemAppear/lastTimerLabel.text = "Give up in.." + str(ceil(secondTimer-($DemAppear/ProgressBar.value/(100/secondTimer))))
+		
 	if $DemAppear/ProgressBar.value >= 100 and !paid:
 		death()
 
