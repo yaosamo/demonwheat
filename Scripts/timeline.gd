@@ -11,10 +11,9 @@ var paid = false
 var secondTimer = 5
 @export var demonQuota : int = 100
 var demonTalk = preload("res://Scripts/demontalk.tres")
+var dialogue = demonTalk.data["dialogues"]
 
 func _ready():
-	for talk in demonTalk.data["dialogues"]:
-		$DemAppear/talk.text = talk
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -53,6 +52,7 @@ func _process(delta):
 
 func demonCall():
 # add 10s timer if not paid by then goto death
+	$DemAppear/talk.text = dialogue[randi() % dialogue.size()]
 	$DemAppear.visible = true
 	demonsPresented = true
 	print_debug("hello I am a demon")
