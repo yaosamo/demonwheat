@@ -26,26 +26,27 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-expand_margin_left = 4.0
-expand_margin_top = 4.0
-expand_margin_right = 4.0
-expand_margin_bottom = 4.0
+border_blend = true
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n4ip4"]
-bg_color = Color(0, 0, 0, 1)
+bg_color = Color(0.882353, 0.827451, 0.694118, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 1
-corner_radius_top_right = 1
-corner_radius_bottom_right = 1
-corner_radius_bottom_left = 1
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_811cw"]
 bg_color = Color(1, 0.952941, 0.835294, 1)
@@ -95,7 +96,6 @@ stream = ExtResource("5_7vb1x")
 volume_db = -10.0
 
 [node name="DemAppear" type="Node2D" parent="."]
-visible = false
 position = Vector2(8, -416)
 
 [node name="bg" type="Button" parent="DemAppear"]
@@ -112,9 +112,9 @@ metadata/_edit_use_anchors_ = true
 [node name="payQ" type="Button" parent="DemAppear"]
 auto_translate_mode = 1
 offset_left = 40.0
-offset_top = 197.0
+offset_top = 198.0
 offset_right = 300.0
-offset_bottom = 269.0
+offset_bottom = 270.0
 theme_override_colors/font_color = Color(0.882353, 0.827451, 0.694118, 1)
 theme_override_fonts/font = ExtResource("8_7ch7x")
 theme_override_font_sizes/font_size = 24
@@ -143,20 +143,20 @@ theme_override_font_sizes/font_size = 32
 text = "120,000 wheat"
 
 [node name="ProgressBar" type="ProgressBar" parent="DemAppear"]
-offset_left = 45.0
+offset_left = 40.0
 offset_top = 341.0
-offset_right = 295.0
-offset_bottom = 354.0
+offset_right = 304.0
+offset_bottom = 357.0
 theme_override_styles/background = SubResource("StyleBoxFlat_oa1bj")
 theme_override_styles/fill = SubResource("StyleBoxFlat_n4ip4")
-value = 100.0
+fill_mode = 1
 show_percentage = false
 
 [node name="lastTimerLabel" type="Label" parent="DemAppear"]
 offset_left = 40.0
-offset_top = 289.0
+offset_top = 288.0
 offset_right = 150.0
-offset_bottom = 332.0
+offset_bottom = 331.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("8_7ch7x")
 text = "Give up in..3"
@@ -173,24 +173,21 @@ texture = ExtResource("11_d28d8")
 
 [node name="talkBubble" type="PanelContainer" parent="DemAppear"]
 offset_left = 96.0
-offset_top = -32.0
-offset_right = 304.0
-offset_bottom = 56.0
-size_flags_horizontal = 0
-size_flags_vertical = 4
+offset_top = -16.0
+offset_right = 176.0
+offset_bottom = 40.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_811cw")
 
 [node name="talk" type="Label" parent="DemAppear"]
-offset_left = 109.0
-offset_top = -38.0
-offset_right = 315.0
-offset_bottom = 60.0
+offset_left = 106.0
+offset_top = -20.0
+offset_right = 170.0
+offset_bottom = 43.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_constants/line_spacing = -28
 theme_override_fonts/font = ExtResource("8_7ch7x")
 theme_override_font_sizes/font_size = 24
-text = "test"
+text = "Text
+"
 vertical_alignment = 1
-autowrap_mode = 3
 
 [connection signal="pressed" from="DemAppear/payQ" to="." method="_on_pay_q_pressed"]

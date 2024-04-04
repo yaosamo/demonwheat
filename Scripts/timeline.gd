@@ -2,7 +2,7 @@ extends Node2D
 # scene for gameover
 @export var game_over_scene : PackedScene
 
-@export var demonCallTime : float = 12
+@export var demonCallTime : float = 5
 var speed : float = 2
 var demonsPresented : bool
 var waveAmount : float = 0
@@ -40,19 +40,23 @@ func _process(delta):
 		$timerLabel.text = "Demons are coming"
 		demonCall()
 		
-	if demonsPresented and $DemAppear/ProgressBar.value < 100:
+	if demonsPresented and $DemAppear/ProgressBar.value > 0:
 		#100/second timer gives me step step to achieve desired seconds (5 for example) 100/5 = 20*delta therefore 5 sec to 100 
-		$DemAppear/ProgressBar.value += (100/secondTimer)*delta
+		$DemAppear/ProgressBar.value -= (100/secondTimer)*delta
 		$DemAppear/lastTimerLabel.text = "Give up in.." + str(ceil(secondTimer-($DemAppear/ProgressBar.value/(100/secondTimer))))
 		
-	if $DemAppear/ProgressBar.value >= 100 and !paid:
+	if $DemAppear/ProgressBar.value < 1 and !paid:
 		death()
 
 
 
 func demonCall():
-# add 10s timer if not paid by then goto death
-	$DemAppear/talk.text = dialogue[randi() % dialogue.size()]
+	# calculating size of the bubble
+	var SpeechNum = randi() % dialogue.size()
+	var Speech = dialogue[SpeechNum]
+	$DemAppear/talk.text = Speech
+	$DemAppear/talkBubble.size = Vector2($DemAppear/talk.size.x+24, $DemAppear/talk.size.y-4)
+	# add 10s timer if not paid by then goto death
 	$DemAppear.visible = true
 	demonsPresented = true
 	print_debug("hello I am a demon")
@@ -66,14 +70,16 @@ func death():
 
 
 func _on_pay_q_pressed() -> void:
-	$"/root/Main".wheatValue -= demonQuota
-	print_debug("paid")
-	paid = true
-	demonsPresented = false
-	$DemAppear/ProgressBar.value = 0
-	$DemAppear.visible = false
-	$demonsMus.stop()
-	startNextWave()
+	#check if wheat is available
+	if $"/root/Main".wheatValue >= demonQuota:
+		$"/root/Main".wheatValue -= demonQuota
+		print_debug("paid")
+		paid = true
+		demonsPresented = false
+		$DemAppear/ProgressBar.value = 100
+		$DemAppear.visible = false
+		$demonsMus.stop()
+		startNextWave()
 	pass 
 
 
