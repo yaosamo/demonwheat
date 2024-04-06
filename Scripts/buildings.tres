@@ -20,19 +20,19 @@ data = {
 "Price": 150.0
 }],
 "buildings": [{
-"Desc": "Harvest 0.5 wheat per second",
+"Desc": "Harvest 1 wheat per second",
 "Name": "Field Worker",
 "Price": 10.0
 }, {
-"Desc": "Harvest 1 wheat per second",
+"Desc": "Harvest 5 wheat per second",
 "Name": "Harvester",
-"Price": 50.0
+"Price": 45.0
 }, {
-"Desc": "Harvest 2 wheat per second",
+"Desc": "Harvest 10 wheat per second",
 "Name": "Heavy Harvester",
-"Price": 50.0
+"Price": 80.0
 }, {
-"Desc": "Harvest 1.5 wheat per second but seduces field worker production by 10%",
+"Desc": "Harvest 15 wheat per second but seduces field worker production by 10%",
 "Name": "Succubus",
 "Price": 100.0
 }]

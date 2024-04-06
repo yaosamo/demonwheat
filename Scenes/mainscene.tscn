@@ -114,9 +114,11 @@ func manualHarvesting():
 func autoHarvesting() -> float:
 	var fieldworker = bonuses[\"Field Worker\"].amount
 	var harvester = bonuses[\"Harvester\"].amount
+	var heavyharvester = bonuses[\"Heavy Harvester\"].amount
 	var succubus = bonuses[\"Succubus\"].amount
 	# combined wheat per second 1.05 = 5% adding bonus: *pow(1.05,bettertools)
-	var wheatPerSec = (fieldworker*0.5+harvester)
+	var succubusEffect = pow(0.8, succubus)
+	var wheatPerSec = fieldworker+harvester*5+heavyharvester*10+succubus*15
 	return wheatPerSec
 
 

@@ -2,14 +2,14 @@ extends Node2D
 # scene for gameover
 @export var game_over_scene : PackedScene
 
-@export var demonCallTime : float = 5
-var speed : float = 2
+@export var demonCallTime : float = 12
+var speed : float = 0.25
 var demonsPresented : bool
 var waveAmount : float = 0
 var maxProgress = 12
 var paid = false
-var secondTimer = 5
-@export var demonQuota : int = 100
+var secondTimer = 10
+@export var demonQuota : int = 667
 var demonTalk = preload("res://Scripts/demontalk.tres")
 var dialogue = demonTalk.data["dialogues"]
 
@@ -43,7 +43,7 @@ func _process(delta):
 	if demonsPresented and $DemAppear/ProgressBar.value > 0:
 		#100/second timer gives me step step to achieve desired seconds (5 for example) 100/5 = 20*delta therefore 5 sec to 100 
 		$DemAppear/ProgressBar.value -= (100/secondTimer)*delta
-		$DemAppear/lastTimerLabel.text = "Give up in.." + str(ceil(secondTimer-($DemAppear/ProgressBar.value/(100/secondTimer))))
+		$DemAppear/lastTimerLabel.text = "Give up in.." + str(ceil($DemAppear/ProgressBar.value/(100/secondTimer)))
 		
 	if $DemAppear/ProgressBar.value < 1 and !paid:
 		death()
@@ -88,9 +88,9 @@ func startNextWave():
 	waveAmount += 1
 	print_debug("starting wave#:",waveAmount)
 	# increase quota
-	demonQuota = 100*pow(1.25, waveAmount)
+	demonQuota = 667*pow(2, waveAmount)
 	# deadline
-	maxProgress *= 1.25
+	maxProgress *= 1
 	paid = false
 	demonCallTime = maxProgress
 	# move to starting point
