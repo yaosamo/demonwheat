@@ -3,21 +3,21 @@
 [resource]
 data = {
 "bonuses": [{
-"Desc": "Workers twice as efficient",
-"Name": "Sprinkler",
+"Desc": "Heavy harvesters twice as efficient",
+"Name": "Nuts and bolts",
 "Price": 1000.0
 }, {
-"Desc": "Speed up harvesting by 10%",
-"Name": "Solar Panels",
-"Price": 150.0
+"Desc": "Harvesting is now faster by 20%",
+"Name": "Better tools",
+"Price": 1000.0
 }, {
-"Desc": "Harveting is now faster by 10%",
-"Name": "Improved tools",
-"Price": 150.0
-},{
-"Desc": "Harveting is now faster by 10%",
-"Name": "Improved tools",
-"Price": 150.0
+"Desc": "Workers twice as efficient",
+"Name": "Fresh Bread",
+"Price": 1000.0
+}, {
+"Desc": "Speed up harvesters by 10%",
+"Name": "Solar Panels",
+"Price": 1000.0
 }],
 "buildings": [{
 "Desc": "Harvest 1 wheat per second",
@@ -32,7 +32,7 @@ data = {
 "Name": "Heavy Harvester",
 "Price": 80.0
 }, {
-"Desc": "Harvest 15 wheat per second but seduces field worker production by 10%",
+"Desc": "Harvest 15 wheat per second but demons quota is 1% higher?",
 "Name": "Succubus",
 "Price": 100.0
 }]

@@ -75,7 +75,7 @@ func _on_pay_q_pressed() -> void:
 		$"/root/Main".wheatValue -= demonQuota
 		print_debug("paid")
 		paid = true
-		demonsPresented = false
+		demonsPresented = false 
 		$DemAppear/ProgressBar.value = 100
 		$DemAppear.visible = false
 		$demonsMus.stop()
@@ -88,9 +88,9 @@ func startNextWave():
 	waveAmount += 1
 	print_debug("starting wave#:",waveAmount)
 	# increase quota
-	demonQuota = 667*pow(2, waveAmount)
+	demonQuota = 667*pow(1.25, waveAmount)
 	# deadline
-	maxProgress *= 1
+	maxProgress *= 1.1
 	paid = false
 	demonCallTime = maxProgress
 	# move to starting point

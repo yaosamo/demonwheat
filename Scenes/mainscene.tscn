@@ -39,8 +39,7 @@ func _ready():
 		var currentObject = buildingsData[object]
 		# show max 2 bonuses at a time
 		var range_end = currentObject.size()
-		if object == \"bonuses\":
-			range_end = 2
+		
 		# forloop to go through buildings / bonuses 
 		for i in range(range_end):
 			var b = currentObject[i]
@@ -53,6 +52,9 @@ func _ready():
 			node.amount = 0
 			# moves bonuses down to upgrades and set padding
 			if object == \"bonuses\":
+				# hide bonuses if more than 2
+				if i > 1:
+					node.visible = false
 				node.position.y += 540
 				node.position.x = i * (bonusW + bonusPadding)
 				node.buttonH = bonusH
@@ -61,7 +63,8 @@ func _ready():
 				node.position.y = i * (buildingH + buildingPadding)
 				node.buttonH = buildingH
 				node.buttonW = buildingW
-			
+		
+		
 			# calculates height of the building
 			var descLenght = len(node.bonusdesc)
 			if descLenght >= 46:
@@ -112,13 +115,19 @@ func manualHarvesting():
 
 
 func autoHarvesting() -> float:
+	# buildings
 	var fieldworker = bonuses[\"Field Worker\"].amount
 	var harvester = bonuses[\"Harvester\"].amount
 	var heavyharvester = bonuses[\"Heavy Harvester\"].amount
 	var succubus = bonuses[\"Succubus\"].amount
+	# Bonuses
+	var bread = bonuses[\"Fresh Bread\"].amount
+	var solarPanels = bonuses[\"Solar Panels\"].amount
+	var betterTools = bonuses[\"Better tools\"].amount
+	#var nutsNBolts = bonuses[\"Nuts and bolts\"].amount
 	# combined wheat per second 1.05 = 5% adding bonus: *pow(1.05,bettertools)
-	var succubusEffect = pow(0.8, succubus)
-	var wheatPerSec = fieldworker+harvester*5+heavyharvester*10+succubus*15
+	var breadEffect = pow(2, bread)
+	var wheatPerSec = fieldworker*breadEffect+harvester*5+heavyharvester*10+succubus*15
 	return wheatPerSec
 
 
@@ -132,6 +141,11 @@ func thousandsFrom(val) -> String:
 	p.append(str(v))
 	p.reverse()
 	return \",\".join(p)
+	
+	
+func thousandstoK() -> int:
+	return 1
+	pass
 
 
 #Format string \"1.25 wheat / sec\"
