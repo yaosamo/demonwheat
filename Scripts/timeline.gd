@@ -9,11 +9,15 @@ var waveAmount : float = 0
 var maxProgress = 12
 var paid = false
 var secondTimer = 10
-@export var demonQuota : int = 667
+var baseQuota = 199
+@export var demonQuota : int = 0
 var demonTalk = preload("res://Scripts/demontalk.tres")
 var dialogue = demonTalk.data["dialogues"]
+var quotaDisplay = "Demons quota: {0}"
 
 func _ready():
+	demonQuota = baseQuota
+	$quotaValueDisplay.text = quotaDisplay.format([demonQuota])
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -86,11 +90,13 @@ func _on_pay_q_pressed() -> void:
 func startNextWave():
 	# next wave
 	waveAmount += 1
-	print_debug("starting wave#:",waveAmount)
+	$"/root/Main/yearLabel".text = str("Year ", waveAmount+1)
+	print_debug("starting year#:",waveAmount)
 	# increase quota
-	demonQuota = 667*pow(1.25, waveAmount)
+	demonQuota = baseQuota*pow(1.25, waveAmount)
+	$quotaValueDisplay.text = quotaDisplay.format([demonQuota])
 	# deadline
-	maxProgress *= 1.1
+	maxProgress *= 1
 	paid = false
 	demonCallTime = maxProgress
 	# move to starting point

@@ -20,20 +20,20 @@ data = {
 "Price": 1000.0
 }],
 "buildings": [{
-"Desc": "Harvest 1 wheat per second",
+"Desc": "Harvest  wheat per second",
 "Name": "Field Worker",
 "Price": 10.0
 }, {
 "Desc": "Harvest 5 wheat per second",
 "Name": "Harvester",
-"Price": 45.0
+"Price": 100.0
 }, {
 "Desc": "Harvest 10 wheat per second",
 "Name": "Heavy Harvester",
-"Price": 80.0
+"Price": 200.0
 }, {
 "Desc": "Harvest 15 wheat per second but demons quota is 1% higher?",
 "Name": "Succubus",
-"Price": 100.0
+"Price": 300.0
 }]
 }

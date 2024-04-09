@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://570hps3njcqy"]
+[gd_scene load_steps=12 format=3 uid="uid://570hps3njcqy"]
 
 [ext_resource type="Theme" uid="uid://b4h3syf1usohg" path="res://theme.tres" id="1_hvc3h"]
 [ext_resource type="Texture2D" uid="uid://csvsy3b0r3bvc" path="res://Graphics/Bonuses-bg@2x.png" id="1_i0gax"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://xmmt1r1up00r" path="res://Scenes/timeline.tscn" id="4_bhfg0"]
 [ext_resource type="FontFile" uid="uid://tb7p0lrnu6ob" path="res://Inter-SemiBold.ttf" id="5_yfomq"]
 [ext_resource type="AudioStream" uid="uid://bmi18jpdsojlg" path="res://Sounds/bg.mp3" id="9_em6ej"]
+[ext_resource type="Texture2D" uid="uid://dha1geeq70ta4" path="res://Graphics/year-wreath@2x.png" id="10_8h8rh"]
 [ext_resource type="AudioStream" uid="uid://bo0jr3h20u2ge" path="res://Sounds/vshik.mp3" id="10_qqqaa"]
 
 [sub_resource type="GDScript" id="GDScript_s2meh"]
@@ -127,7 +128,7 @@ func autoHarvesting() -> float:
 	#var nutsNBolts = bonuses[\"Nuts and bolts\"].amount
 	# combined wheat per second 1.05 = 5% adding bonus: *pow(1.05,bettertools)
 	var breadEffect = pow(2, bread)
-	var wheatPerSec = fieldworker*breadEffect+harvester*5+heavyharvester*10+succubus*15
+	var wheatPerSec = (fieldworker*0.5)*breadEffect+harvester*1+heavyharvester*1.5+succubus*2
 	return wheatPerSec
 
 
@@ -231,3 +232,24 @@ volume_db = 10.0
 
 [node name="vshik" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_qqqaa")
+
+[node name="yearLabel" type="Label" parent="."]
+offset_left = 136.0
+offset_top = 1010.0
+offset_right = 203.0
+offset_bottom = 1033.0
+theme = ExtResource("1_hvc3h")
+text = "Year 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Year-wreath_2x" type="Sprite2D" parent="yearLabel"]
+position = Vector2(91.75, 10)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("10_8h8rh")
+
+[node name="Year-wreath_2x2" type="Sprite2D" parent="yearLabel"]
+position = Vector2(-26.25, 10)
+rotation = -3.14159
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("10_8h8rh")
