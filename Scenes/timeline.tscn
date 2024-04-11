@@ -54,7 +54,7 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[node name="Timeline" type="Node2D"]
+[node name="Timeline" type="Node2D" groups=["Persist"]]
 script = ExtResource("1_knsao")
 game_over_scene = ExtResource("2_dcogd")
 

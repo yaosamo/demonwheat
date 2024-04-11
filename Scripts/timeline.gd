@@ -13,17 +13,16 @@ var baseQuota = 199
 @export var demonQuota : int = 0
 var demonTalk = preload("res://Scripts/demontalk.tres")
 var dialogue = demonTalk.data["dialogues"]
-var quotaDisplay = "Demons quota: {0}"
 
 func _ready():
 	demonQuota = baseQuota
-	$quotaValueDisplay.text = quotaDisplay.format([demonQuota])
+	$quotaValueDisplay.text = "Demons quota: %d" % demonQuota
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# on demons popup wheat quota
-	$DemAppear/quotaValue.text = str(demonQuota, " wheat")
+	$DemAppear/quotaValue.text = "%d wheat" % demonQuota
 
 	if !demonsPresented:
 		# Timer
@@ -94,7 +93,7 @@ func startNextWave():
 	print_debug("starting year#:",waveAmount)
 	# increase quota
 	demonQuota = baseQuota*pow(1.25, waveAmount)
-	$quotaValueDisplay.text = quotaDisplay.format([demonQuota])
+	$quotaValueDisplay.text = "Demons quota: %d" % demonQuota
 	# deadline
 	maxProgress *= 1
 	paid = false

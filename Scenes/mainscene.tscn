@@ -15,9 +15,7 @@
 script/source = "extends Node2D
 
 @export var wheatValue : float
-var bonuscount : float
 var bonuses : Dictionary = {}
-var tools : float
 var buildingsData = preload(\"res://Scripts/buildings.tres\")
 @export var bonusPadding = 16
 @export var buildingPadding = 8
@@ -30,6 +28,7 @@ var buildingsData = preload(\"res://Scripts/buildings.tres\")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	load_game()
 	$BgMusic.play()
 	var buildingsData = buildingsData.data
 	# key for rendering order  
@@ -106,6 +105,7 @@ func _process(delta):
 	wheatValue += wheatPerSec*delta
 	$WheatValue.text = thousandsFrom(wheatValue) + \" wheat\"
 	$HarvestSpeed.text = str(decimalsFrom(wheatPerSec), \" / sec\")
+	saveGame()
 	pass
 
 
@@ -142,11 +142,6 @@ func thousandsFrom(val) -> String:
 	p.append(str(v))
 	p.reverse()
 	return \",\".join(p)
-	
-	
-func thousandstoK() -> int:
-	return 1
-	pass
 
 
 #Format string \"1.25 wheat / sec\"
@@ -167,10 +162,48 @@ func bonuspurchase(node):
 		node.price = node.baseprice*pow(1.15, node.amount)
 		print(\"Bonus added: \", node.amount)
 	pass
+	
+func saveBuldings(node):
+	var save_dict = {
+	\"Name\" : node.name,
+	\"Amount\" : node.amount,
+	}
+	return save_dict
 
+
+
+
+func saveGame():
+	var save_game = FileAccess.open(\"user://savegame.save\", FileAccess.WRITE)
+	var saveWheat = { \"wheatValue\" : wheatValue }
+	#var json_string = JSON.stringify(saveWheat)
+	save_game.store_line(str(saveWheat))
+	print(\"saved\", save_game)
+
+
+func load_game():
+	if not FileAccess.file_exists(\"user://savegame.save\"):
+		return # Error! We don't have a save to load.
+
+	var save_game = FileAccess.open(\"user://savegame.save\", FileAccess.READ)
+	while save_game.get_position() < save_game.get_length():
+		var json_string = save_game.get_line()
+
+		# Creates the helper class to interact with JSON
+		var json = JSON.new()
+
+		# Check if there is any error while parsing the JSON string, skip in case of failure
+		var parse_result = json.parse(json_string)
+		if not parse_result == OK:
+			print(\"JSON Parse Error: \", json.get_error_message(), \" in \", json_string, \" at line \", json.get_error_line())
+			continue
+
+		# Get the data from the JSON object
+		var node_data = json.get_data()
+		wheatValue = node_data[\"wheatValue\"]
 "
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" groups=["Persist"]]
 script = SubResource("GDScript_s2meh")
 
 [node name="Bg" type="Sprite2D" parent="."]

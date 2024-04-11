@@ -22,6 +22,10 @@ window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
 mouse_cursor/custom_image="res://Graphics/cursor.png"
 
+[global_group]
+
+Persist=""
+
 [rendering]
 
 environment/defaults/default_clear_color=Color(0.964706, 0.913725, 0.780392, 1)
