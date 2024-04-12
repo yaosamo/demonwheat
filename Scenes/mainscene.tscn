@@ -13,7 +13,7 @@
 
 [sub_resource type="GDScript" id="GDScript_s2meh"]
 script/source = "extends Node2D
-
+var saveTimer = 5
 @export var wheatValue : float
 var bonuses : Dictionary = {}
 var buildingsData = preload(\"res://Scripts/buildings.tres\")
@@ -27,7 +27,7 @@ var buildingsData = preload(\"res://Scripts/buildings.tres\")
 @onready var bonusprototype = {\"buildings\": preload(\"res://Scenes/buildings.tscn\"), \"bonuses\": preload(\"res://Scenes/bonuses.tscn\")}
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready():	
 	load_game()
 	$BgMusic.play()
 	var buildingsData = buildingsData.data
@@ -105,7 +105,12 @@ func _process(delta):
 	wheatValue += wheatPerSec*delta
 	$WheatValue.text = thousandsFrom(wheatValue) + \" wheat\"
 	$HarvestSpeed.text = str(decimalsFrom(wheatPerSec), \" / sec\")
-	saveGame()
+	
+	
+	saveTimer -= delta
+	if saveTimer < 1:
+		saveGame()
+		saveTimer = 5
 	pass
 
 
@@ -163,7 +168,7 @@ func bonuspurchase(node):
 		print(\"Bonus added: \", node.amount)
 	pass
 	
-func saveBuldings(node):
+func saveBuldings(node) -> Dictionary:
 	var save_dict = {
 	\"Name\" : node.name,
 	\"Amount\" : node.amount,
