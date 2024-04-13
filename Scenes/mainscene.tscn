@@ -27,8 +27,7 @@ var buildingsData = preload(\"res://Scripts/buildings.tres\")
 @onready var bonusprototype = {\"buildings\": preload(\"res://Scenes/buildings.tscn\"), \"bonuses\": preload(\"res://Scenes/bonuses.tscn\")}
 
 # Called when the node enters the scene tree for the first time.
-func _ready():	
-	load_game()
+func _ready():
 	$BgMusic.play()
 	var buildingsData = buildingsData.data
 	# key for rendering order  
@@ -48,6 +47,7 @@ func _ready():
 			node.bonusname = b[\"Name\"]
 			node.bonusdesc = b[\"Desc\"]
 			node.price = b[\"Price\"]
+			# add check if loading update price and amount
 			node.baseprice = node.price
 			node.amount = 0
 			# moves bonuses down to upgrades and set padding
@@ -63,8 +63,8 @@ func _ready():
 				node.position.y = i * (buildingH + buildingPadding)
 				node.buttonH = buildingH
 				node.buttonW = buildingW
-		
-		
+				
+				
 			# calculates height of the building
 			var descLenght = len(node.bonusdesc)
 			if descLenght >= 46:
@@ -77,6 +77,7 @@ func _ready():
 			# function called when signal pressed happend on Button Node
 			# to make separate functions for bonuses, check for buttonname
 			node.get_node(\"Button\").connect(\"pressed\", bonuspurchase.bind(node))
+	load_game()
 	pass
 
 
@@ -165,25 +166,27 @@ func bonuspurchase(node):
 		node.amount += 1
 		# Setting price 
 		node.price = node.baseprice*pow(1.15, node.amount)
-		print(\"Bonus added: \", node.amount)
+		print(\"Bonus added: \", node.bonusname, \" \", node.amount)
+		saveGame()
 	pass
 	
-func saveBuldings(node) -> Dictionary:
-	var save_dict = {
-	\"Name\" : node.name,
-	\"Amount\" : node.amount,
-	}
-	return save_dict
-
-
-
 
 func saveGame():
 	var save_game = FileAccess.open(\"user://savegame.save\", FileAccess.WRITE)
-	var saveWheat = { \"wheatValue\" : wheatValue }
-	#var json_string = JSON.stringify(saveWheat)
-	save_game.store_line(str(saveWheat))
-	print(\"saved\", save_game)
+	var saveNode = save()
+	var json_string = JSON.stringify(saveNode)
+	save_game.store_line(json_string)
+	print_debug(\"Saved Current State:\", saveNode)
+
+
+func save() -> Dictionary:
+	var save_dict = {
+		\"wheatValue\" : wheatValue
+	}
+	for i in bonuses.keys():
+		save_dict[i] = bonuses[i].amount
+	return save_dict
+
 
 
 func load_game():
@@ -204,8 +207,14 @@ func load_game():
 			continue
 
 		# Get the data from the JSON object
-		var node_data = json.get_data()
-		wheatValue = node_data[\"wheatValue\"]
+		var saved_data = json.get_data()
+		wheatValue = saved_data[\"wheatValue\"]
+	
+		for i in saved_data.keys():
+			if i != \"wheatValue\":
+				bonuses[i].amount = saved_data[i]
+				print_debug(\"3arpy3ka \", i, \" -> \", saved_data[i])
+		
 "
 
 [node name="Main" type="Node2D" groups=["Persist"]]

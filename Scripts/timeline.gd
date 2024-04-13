@@ -10,6 +10,7 @@ var maxProgress = 12
 var paid = false
 var secondTimer = 10
 var baseQuota = 199
+var currentProgress
 @export var demonQuota : int = 0
 var demonTalk = preload("res://Scripts/demontalk.tres")
 var dialogue = demonTalk.data["dialogues"]
@@ -28,7 +29,7 @@ func _process(delta):
 		# Timer
 		demonCallTime -= speed*delta
 		# Progress in percentages just without multiplying by 100
-		var currentProgress = demonCallTime/maxProgress
+		currentProgress = demonCallTime/maxProgress
 		# Maybe add vector point to get it's position as final point
 		$DemonIcon.position.x = lerp(27, 818, currentProgress)
 		$timerLabel.text = str(ceil(demonCallTime), " months til demons")
