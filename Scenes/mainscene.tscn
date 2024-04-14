@@ -16,6 +16,7 @@ script/source = "extends Node2D
 var saveTimer = 5
 @export var wheatValue : float
 var bonuses : Dictionary = {}
+var save_dict : Dictionary = {}
 var buildingsData = preload(\"res://Scripts/buildings.tres\")
 @export var bonusPadding = 16
 @export var buildingPadding = 8
@@ -180,13 +181,15 @@ func saveGame():
 
 
 func save() -> Dictionary:
-	var save_dict = {
-		\"wheatValue\" : wheatValue
+	save_dict = {
+		\"operations\": {
+			\"wheatValue\" : wheatValue
+			},
+		\"bonuses\": {},
 	}
 	for i in bonuses.keys():
-		save_dict[i] = bonuses[i].amount
+		save_dict.bonuses[i] = bonuses[i].amount
 	return save_dict
-
 
 
 func load_game():
@@ -208,12 +211,14 @@ func load_game():
 
 		# Get the data from the JSON object
 		var saved_data = json.get_data()
-		wheatValue = saved_data[\"wheatValue\"]
 	
-		for i in saved_data.keys():
-			if i != \"wheatValue\":
-				bonuses[i].amount = saved_data[i]
-				print_debug(\"3arpy3ka \", i, \" -> \", saved_data[i])
+		# operations
+		wheatValue = saved_data.operations[\"wheatValue\"]
+			
+		#bonuses and buildings
+		for b in saved_data.bonuses.keys():
+			bonuses[b].amount = saved_data.bonuses[b]
+			print_debug(\"3arpy3ka 6oHycoB \", b, \" -> \", saved_data.bonuses[b])
 		
 "
 
