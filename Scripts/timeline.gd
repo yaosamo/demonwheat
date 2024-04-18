@@ -1,6 +1,7 @@
 extends Node2D
 # scene for gameover
 @export var game_over_scene : PackedScene
+@onready var game = get_node("/root/GameState")
 
 @export var demonCallTime : float = 12
 var speed : float = 0.25
@@ -75,8 +76,8 @@ func death():
 
 func _on_pay_q_pressed() -> void:
 	#check if wheat is available
-	if $"/root/Main".wheatValue >= demonQuota:
-		$"/root/Main".wheatValue -= demonQuota
+	if game.wheat >= demonQuota:
+		game.wheat -= demonQuota
 		print_debug("paid")
 		paid = true
 		demonsPresented = false 
@@ -102,4 +103,5 @@ func startNextWave():
 	# move to starting point
 	$DemonIcon.position.x = maxProgress
 	$"/root/Main/BgMusic".play()
+	$"/root/Main/".saveGame()
 

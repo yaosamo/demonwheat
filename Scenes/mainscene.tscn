@@ -13,10 +13,10 @@
 
 [sub_resource type="GDScript" id="GDScript_s2meh"]
 script/source = "extends Node2D
-var saveTimer = 5
-@export var wheatValue : float
+
+@onready var game = get_node(\"/root/GameState\")
+
 var bonuses : Dictionary = {}
-var save_dict : Dictionary = {}
 var buildingsData = preload(\"res://Scripts/buildings.tres\")
 @export var bonusPadding = 16
 @export var buildingPadding = 8
@@ -65,7 +65,6 @@ func _ready():
 				node.buttonH = buildingH
 				node.buttonW = buildingW
 				
-				
 			# calculates height of the building
 			var descLenght = len(node.bonusdesc)
 			if descLenght >= 46:
@@ -104,21 +103,15 @@ func _input(event):
 func _process(delta):
 	#AutoHarvester upd value and label
 	var wheatPerSec = autoHarvesting()
-	wheatValue += wheatPerSec*delta
-	$WheatValue.text = thousandsFrom(wheatValue) + \" wheat\"
+	game.wheat += wheatPerSec*delta
+	$WheatValue.text = thousandsFrom(game.wheat) + \" wheat\"
 	$HarvestSpeed.text = str(decimalsFrom(wheatPerSec), \" / sec\")
-	
-	
-	saveTimer -= delta
-	if saveTimer < 1:
-		saveGame()
-		saveTimer = 5
 	pass
 
 
 func manualHarvesting():
 	var baseClick = 1.0
-	wheatValue += baseClick
+	game.wheat += baseClick
 	print(\"Manually Harvested\")
 
 
@@ -161,9 +154,9 @@ func decimalsFrom(number) -> String:
 func bonuspurchase(node):
 	# AutoHarvester purchasing logic
 	# Check if player have enough resource to buy a harvester 
-	if wheatValue >= node.price:
+	if game.wheat >= node.price:
 		#take resources give harvester
-		wheatValue -= node.price
+		game.wheat -= node.price
 		node.amount += 1
 		# Setting price 
 		node.price = node.baseprice*pow(1.15, node.amount)
@@ -181,9 +174,9 @@ func saveGame():
 
 
 func save() -> Dictionary:
-	save_dict = {
+	var save_dict = {
 		\"operations\": {
-			\"wheatValue\" : wheatValue
+			\"wheatValue\" : game.wheat
 			},
 		\"bonuses\": {},
 	}
@@ -211,15 +204,13 @@ func load_game():
 
 		# Get the data from the JSON object
 		var saved_data = json.get_data()
-	
-		# operations
-		wheatValue = saved_data.operations[\"wheatValue\"]
-			
-		#bonuses and buildings
-		for b in saved_data.bonuses.keys():
-			bonuses[b].amount = saved_data.bonuses[b]
-			print_debug(\"3arpy3ka 6oHycoB \", b, \" -> \", saved_data.bonuses[b])
-		
+		if saved_data:
+			# Operations
+			game.wheat = saved_data.operations[\"wheatValue\"]
+			# Bonuses and buildings
+			for b in saved_data.bonuses.keys():
+				bonuses[b].amount = saved_data.bonuses[b]
+				print_debug(\"3arpy3ka 6oHycoB \", b, \" -> \", saved_data.bonuses[b])
 "
 
 [node name="Main" type="Node2D" groups=["Persist"]]
