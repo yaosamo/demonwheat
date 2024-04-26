@@ -1,12 +1,12 @@
 extends Node2D
 # scene for gameover
+
 @export var game_over_scene : PackedScene
 @onready var game = get_node("/root/GameState")
 
 @export var demonCallTime : float = 12
 var speed : float = 0.25
 var demonsPresented : bool
-var waveAmount : float = 0
 var maxProgress = 12
 var paid = false
 var secondTimer = 10
@@ -90,11 +90,11 @@ func _on_pay_q_pressed() -> void:
 
 func startNextWave():
 	# next wave
-	waveAmount += 1
-	$"/root/Main/yearLabel".text = str("Year ", waveAmount+1)
-	print_debug("starting year#:",waveAmount)
+	game.wave += 1
+	$"/root/Main/yearLabel".text = str("Year ", game.wave+1)
+	print_debug("starting year#:",game.wave)
 	# increase quota
-	demonQuota = baseQuota*pow(1.25, waveAmount)
+	demonQuota = baseQuota*pow(1.25, game.wave)
 	$quotaValueDisplay.text = "Demons quota: %d" % demonQuota
 	# deadline
 	maxProgress *= 1

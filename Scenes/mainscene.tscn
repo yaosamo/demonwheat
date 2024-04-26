@@ -15,7 +15,6 @@
 script/source = "extends Node2D
 
 @onready var game = get_node(\"/root/GameState\")
-
 var bonuses : Dictionary = {}
 var buildingsData = preload(\"res://Scripts/buildings.tres\")
 @export var bonusPadding = 16
@@ -29,6 +28,8 @@ var buildingsData = preload(\"res://Scripts/buildings.tres\")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# update label
+	$\"/root/Main/yearLabel\".text = str(\"Year \", game.wave+1)
 	$BgMusic.play()
 	var buildingsData = buildingsData.data
 	# key for rendering order  
@@ -161,7 +162,7 @@ func bonuspurchase(node):
 		# Setting price 
 		node.price = node.baseprice*pow(1.15, node.amount)
 		print(\"Bonus added: \", node.bonusname, \" \", node.amount)
-		saveGame()
+
 	pass
 	
 
@@ -176,7 +177,8 @@ func saveGame():
 func save() -> Dictionary:
 	var save_dict = {
 		\"operations\": {
-			\"wheatValue\" : game.wheat
+			\"wheatValue\" : game.wheat,
+			\"wave\" : game.wave,
 			},
 		\"bonuses\": {},
 	}
@@ -207,6 +209,12 @@ func load_game():
 		if saved_data:
 			# Operations
 			game.wheat = saved_data.operations[\"wheatValue\"]
+			game.wave = saved_data.operations[\"wave\"]
+			$yearLabel.text = str(\"Year \", game.wave+1)
+			
+			# calculate quota, based on wave
+			# calc building/bonus price based on amount of purchases
+			
 			# Bonuses and buildings
 			for b in saved_data.bonuses.keys():
 				bonuses[b].amount = saved_data.bonuses[b]
@@ -282,7 +290,7 @@ offset_top = 1010.0
 offset_right = 203.0
 offset_bottom = 1033.0
 theme = ExtResource("1_hvc3h")
-text = "Year 1"
+text = "Year #"
 horizontal_alignment = 1
 vertical_alignment = 1
 
