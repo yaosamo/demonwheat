@@ -162,6 +162,7 @@ func bonuspurchase(node):
 		# Setting price 
 		node.price = calcBonusPrice(node)
 		print(\"Bonus added: \", node.bonusname, \" \", node.amount)
+		saveGame()
 	pass
 	
 func calcBonusPrice(node) -> int:
@@ -172,7 +173,7 @@ func saveGame():
 	var saveNode = save()
 	var json_string = JSON.stringify(saveNode)
 	save_game.store_line(json_string)
-	print_debug(\"Saved status\", saveNode)
+	print_debug(\"Saved Current State:\", saveNode)
 
 
 func save() -> Dictionary:
@@ -184,9 +185,8 @@ func save() -> Dictionary:
 		\"bonuses\": {},
 	}
 	for i in bonuses.keys():
-		save_dict.bonuses[i] = {
-			\"amount\" : bonuses[i].amount,
-			}
+		save_dict.bonuses[i] = bonuses[i]
+		print_debug(\"Saved bonus :\",save_dict.bonuses[i], save_dict.bonuses[i].bonusname, save_dict.bonuses[i].amount, save_dict.bonuses[i].price)
 	return save_dict
 
 
@@ -221,9 +221,11 @@ func load_game():
 			
 			# Bonuses and buildings
 			for b in saved_data.bonuses.keys():
+				bonuses[b].amount = saved_data.bonuses[b]
 				var bload = saved_data.bonuses[b]
-				bonuses[b].amount = saved_data.bonuses[b].amount
-				bonuses[b].price = calcBonusPrice(bonuses[b])
+				print_debug(\"Loading bonuses:\", bload)
+				#bonuses[b].price = saved_data.bonuses[b].price
+				#bonuses[b].price = calcBonusPrice(b)
 				print_debug(\"3arpy3ka 6oHycoB \", b, \" -> \", saved_data.bonuses[b])
 "
 

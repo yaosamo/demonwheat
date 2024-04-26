@@ -17,7 +17,7 @@ var demonTalk = preload("res://Scripts/demontalk.tres")
 var dialogue = demonTalk.data["dialogues"]
 
 func _ready():
-	demonQuota = baseQuota
+	demonQuota = calcQuota()
 	$quotaValueDisplay.text = "Demons quota: %d" % demonQuota
 	pass # Replace with function body.
 
@@ -94,14 +94,14 @@ func startNextWave():
 	$"/root/Main/yearLabel".text = str("Year ", game.wave+1)
 	print_debug("starting year#:",game.wave)
 	# increase quota
-	demonQuota = baseQuota*pow(1.25, game.wave)
+	demonQuota = calcQuota()
 	$quotaValueDisplay.text = "Demons quota: %d" % demonQuota
-	# deadline
-	maxProgress *= 1
 	paid = false
-	demonCallTime = maxProgress
 	# move to starting point
 	$DemonIcon.position.x = maxProgress
 	$"/root/Main/BgMusic".play()
 	$"/root/Main/".saveGame()
 
+func calcQuota() -> int:
+	return baseQuota*pow(1.25, game.wave)
+	
