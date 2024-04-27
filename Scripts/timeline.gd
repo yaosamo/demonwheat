@@ -5,12 +5,12 @@ extends Node2D
 @onready var game = get_node("/root/GameState")
 
 @export var demonCallTime : float = 12
-var speed : float = 0.25
+var speed : float = 1.25
 var demonsPresented : bool
 var maxProgress = 12
 var paid = false
 var secondTimer = 10
-var baseQuota = 199
+var baseQuota = 19
 var currentProgress
 @export var demonQuota : int = 0
 var demonTalk = preload("res://Scripts/demontalk.tres")
@@ -68,9 +68,19 @@ func demonCall():
 	
 	
 func death():
+	# clear save record
+	game.wheat = 0
+	game.wave = 0
+	var save_file = FileAccess.open("user://savegame.save", FileAccess.WRITE)
+	var saveNode = {}
+	var json_string = JSON.stringify(saveNode)
+	save_file.store_line(json_string)
+	print_debug("Reseting save file")
+	
 	print_debug("You're dead")
 	$DemAppear.visible = false
 	var ERR = get_tree().change_scene_to_packed(game_over_scene)
+	
 	pass
 
 
