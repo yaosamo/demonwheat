@@ -76,11 +76,9 @@ func death():
 	var json_string = JSON.stringify(saveNode)
 	save_file.store_line(json_string)
 	print_debug("Reseting save file")
-	
 	print_debug("You're dead")
 	$DemAppear.visible = false
 	var ERR = get_tree().change_scene_to_packed(game_over_scene)
-	
 	pass
 
 

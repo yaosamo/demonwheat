@@ -30,11 +30,7 @@ var buildingsData = preload(\"res://Scripts/buildings.tres\")
 func _ready():
 	# update label
 	$\"/root/Main/yearLabel\".text = str(\"Year \", game.wave+1)
-	drawBuildingsAndBonuses()
-	load_game()
-	pass
-
-func drawBuildingsAndBonuses():
+	#$BgMusic.play()
 	var buildingsData = buildingsData.data
 	# key for rendering order  
 	var bonusType = [\"buildings\", \"bonuses\"]
@@ -58,11 +54,13 @@ func drawBuildingsAndBonuses():
 			node.amount = 0
 			# moves bonuses down to upgrades and set padding
 			if object == \"bonuses\":
+				# hide bonuses if more than 2 (0 and 1)
+				#if i > 1:
+					#node.visible = false
 				node.position.y += 540
 				node.position.x = i * (bonusW + bonusPadding)
 				node.buttonH = bonusH
 				node.buttonW = bonusW
-				
 			else:
 				node.position.y = i * (buildingH + buildingPadding)
 				node.buttonH = buildingH
@@ -80,7 +78,11 @@ func drawBuildingsAndBonuses():
 			# function called when signal pressed happend on Button Node
 			# to make separate functions for bonuses, check for buttonname
 			node.get_node(\"Button\").connect(\"pressed\", bonuspurchase.bind(node))
-			
+			# purchase bonus should remove bonus from list
+	load_game()
+	pass
+
+
 
 func _input(event):
 	var fieldClick = $FieldArea.get_node(\"Field\")
@@ -162,16 +164,16 @@ func bonuspurchase(node):
 		hideifBonus(node.bonusname)
 		node.price = calcBonusPrice(node)
 		print(\"Bonus added: \", node.bonusname, \" \", node.amount)
+		
 	pass
 	
-	
 func hideifBonus(bonusname):
-	#var bonusData = bonuses[\"bonuses\"]
 	for i in bonuses.keys():
 		if i == bonusname:
-			bonuses[bonusname].visible = false
-	drawBuildingsAndBonuses()
-
+			#bonuses[bonusname].visible = false
+			bonuses[bonusname].position.x += 5
+	for pos in bonuses.size():
+		bonuses[bonusname].position.x -= 100
 	
 	
 func calcBonusPrice(node) -> int:

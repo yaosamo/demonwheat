@@ -5,11 +5,11 @@ data = {
 "bonuses": [{
 "Desc": "Heavy harvesters twice as efficient",
 "Name": "Nuts and bolts",
-"Price": 1000.0
+"Price": 10.0
 }, {
 "Desc": "Harvesting is now faster by 20%",
 "Name": "Better tools",
-"Price": 1000.0
+"Price": 10.0
 }, {
 "Desc": "Workers twice as efficient",
 "Name": "Fresh Bread",
