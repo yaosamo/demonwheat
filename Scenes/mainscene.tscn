@@ -30,7 +30,7 @@ var buildingsData = preload(\"res://Scripts/buildings.tres\")
 func _ready():
 	# update label
 	$\"/root/Main/yearLabel\".text = str(\"Year \", game.wave+1)
-	$BgMusic.play()
+	#$BgMusic.play()
 	var buildingsData = buildingsData.data
 	# key for rendering order  
 	var bonusType = [\"buildings\", \"bonuses\"]
