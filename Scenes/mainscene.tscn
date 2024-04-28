@@ -24,17 +24,17 @@ var buildingsData = preload(\"res://Scripts/buildings.tres\")
 @export var bonusH = 150
 @export var bonusW = 267
 
-@onready var bonusprototype = {\"buildings\": preload(\"res://Scenes/buildings.tscn\"), \"bonuses\": preload(\"res://Scenes/bonuses.tscn\")}
+@onready var bonusprototype = {\"buildings\": preload(\"res://Scenes/buildings.tscn\"), \"bonuses\": preload(\"res://Scenes/bonusess.tscn\")}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# update label
 	$\"/root/Main/yearLabel\".text = str(\"Year \", game.wave+1)
-	drawBuildingsAndBonuses()
+	drawBuildings()
 	load_game()
 	pass
 
-func drawBuildingsAndBonuses():
+func drawBuildings():
 	var buildingsData = buildingsData.data
 	# key for rendering order  
 	var bonusType = [\"buildings\", \"bonuses\"]
@@ -58,8 +58,8 @@ func drawBuildingsAndBonuses():
 			node.amount = 0
 			# moves bonuses down to upgrades and set padding
 			if object == \"bonuses\":
-				node.position.y += 540
-				node.position.x = i * (bonusW + bonusPadding)
+				#node.position.y += 540
+				#node.position.x = i * (bonusW + bonusPadding)
 				node.buttonH = bonusH
 				node.buttonW = bonusW
 				
@@ -74,13 +74,22 @@ func drawBuildingsAndBonuses():
 				var numOfLines = ceil(float(descLenght) / float(46))
 				buildingH += numOfLines*11 
 				node.buttonH = buildingH
-				
-			$BonusButtons.add_child(node)
+
+			if object == \"buildings\":
+				$BuildingContainer.add_child(node)
+				node.get_node(\"Button\").connect(\"pressed\", bonuspurchase.bind(node))
+			if object == \"bonuses\":
+				$BonusContainer.add_child(node)
+				node.connect(\"pressed\", bonuspurchase.bind(node))
 			bonuses[node.bonusname] = node
 			# function called when signal pressed happend on Button Node
 			# to make separate functions for bonuses, check for buttonname
-			node.get_node(\"Button\").connect(\"pressed\", bonuspurchase.bind(node))
+			#node.get_node(\"Button\").connect(\"pressed\", bonuspurchase.bind(node))
 			
+func drawBonuses():
+	# show bonuses when reached year 10, 15 etc, hide after purchase
+	# 4-8 bonuses total up to 2 at any given moment
+	pass
 
 func _input(event):
 	var fieldClick = $FieldArea.get_node(\"Field\")
@@ -166,14 +175,12 @@ func bonuspurchase(node):
 	
 	
 func hideifBonus(bonusname):
-	#var bonusData = bonuses[\"bonuses\"]
-	for i in bonuses.keys():
-		if i == bonusname:
+	var buildingsData = buildingsData.data
+	for i in buildingsData[\"bonuses\"]:
+		if i.Name == bonusname:
 			bonuses[bonusname].visible = false
-	drawBuildingsAndBonuses()
+	pass
 
-	
-	
 func calcBonusPrice(node) -> int:
 	return node.baseprice*pow(1.15, node.amount)
 
@@ -183,7 +190,7 @@ func saveGame():
 	var json_string = JSON.stringify(saveNode)
 	save_game.store_line(json_string)
 	print_debug(\"Saved status\", saveNode)
-
+	pass
 
 func save() -> Dictionary:
 	var save_dict = {
@@ -254,14 +261,20 @@ texture = ExtResource("2_mgeo0")
 position = Vector2(-576.779, 2.47955e-05)
 texture = ExtResource("3_y32we")
 
-[node name="BonusButtons" type="Node2D" parent="."]
+[node name="BonusContainer" type="HBoxContainer" parent="."]
+offset_left = 1160.0
+offset_top = 728.0
+offset_right = 1712.0
+offset_bottom = 898.0
+
+[node name="BuildingContainer" type="Node2D" parent="."]
 position = Vector2(1160, 186)
 
-[node name="ReferenceRect" type="ReferenceRect" parent="BonusButtons"]
+[node name="ReferenceRect" type="ReferenceRect" parent="BuildingContainer"]
 offset_left = -2.0
 offset_top = 1.0
 offset_right = 548.0
-offset_bottom = 744.0
+offset_bottom = 438.0
 
 [node name="WheatValue" type="Label" parent="."]
 offset_left = 52.0
