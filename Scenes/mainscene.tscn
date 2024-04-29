@@ -23,7 +23,6 @@ var buildingsData = preload(\"res://Scripts/buildings.tres\")
 @export var buildingW = 550
 @export var bonusH = 150
 @export var bonusW = 267
-
 @onready var bonusprototype = {\"buildings\": preload(\"res://Scenes/buildings.tscn\"), \"bonuses\": preload(\"res://Scenes/bonusess.tscn\")}
 
 # Called when the node enters the scene tree for the first time.
@@ -44,8 +43,6 @@ func drawBuildings():
 		var currentObject = buildingsData[object]
 		# show max 2 bonuses at a time
 		var range_end = currentObject.size()
-		
-		# forloop to go through buildings / bonuses 
 		for i in range(range_end):
 			var b = currentObject[i]
 			node = bonusprototype[object].instantiate()
@@ -53,22 +50,17 @@ func drawBuildings():
 			node.bonusname = b[\"Name\"]
 			node.bonusdesc = b[\"Desc\"]
 			node.price = b[\"Price\"]
-			# add check if loading update price and amount
 			node.baseprice = node.price
 			node.amount = 0
 			# moves bonuses down to upgrades and set padding
 			if object == \"bonuses\":
-				#node.position.y += 540
-				#node.position.x = i * (bonusW + bonusPadding)
 				node.buttonH = bonusH
 				node.buttonW = bonusW
-				
 			else:
-				node.position.y = i * (buildingH + buildingPadding)
 				node.buttonH = buildingH
 				node.buttonW = buildingW
 				
-			# calculates height of the building
+			# calculate height of the building
 			var descLenght = len(node.bonusdesc)
 			if descLenght >= 46:
 				var numOfLines = ceil(float(descLenght) / float(46))
@@ -76,11 +68,10 @@ func drawBuildings():
 				node.buttonH = buildingH
 
 			if object == \"buildings\":
-				$BuildingContainer.add_child(node)
-				node.get_node(\"Button\").connect(\"pressed\", bonuspurchase.bind(node))
+				$BuildingsContainer.add_child(node)
 			if object == \"bonuses\":
 				$BonusContainer.add_child(node)
-				node.connect(\"pressed\", bonuspurchase.bind(node))
+			node.connect(\"pressed\", bonuspurchase.bind(node))
 			bonuses[node.bonusname] = node
 			# function called when signal pressed happend on Button Node
 			# to make separate functions for bonuses, check for buttonname
@@ -261,20 +252,17 @@ texture = ExtResource("2_mgeo0")
 position = Vector2(-576.779, 2.47955e-05)
 texture = ExtResource("3_y32we")
 
+[node name="BuildingsContainer" type="VBoxContainer" parent="."]
+offset_left = 1160.0
+offset_top = 192.0
+offset_right = 1712.0
+offset_bottom = 592.0
+
 [node name="BonusContainer" type="HBoxContainer" parent="."]
 offset_left = 1160.0
 offset_top = 728.0
 offset_right = 1712.0
 offset_bottom = 898.0
-
-[node name="BuildingContainer" type="Node2D" parent="."]
-position = Vector2(1160, 186)
-
-[node name="ReferenceRect" type="ReferenceRect" parent="BuildingContainer"]
-offset_left = -2.0
-offset_top = 1.0
-offset_right = 548.0
-offset_bottom = 438.0
 
 [node name="WheatValue" type="Label" parent="."]
 offset_left = 52.0
