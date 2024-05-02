@@ -35,7 +35,6 @@ func drawBuildings():
 	var node
 	for object in bonusType:
 		var currentObject = buildingsData[object]
-		# show max 2 bonuses at a time
 		var range_end = currentObject.size()
 		for i in range(range_end):
 			var b = currentObject[i]
@@ -50,14 +49,28 @@ func drawBuildings():
 			if object == \"buildings\":
 				$BuildingsContainer.add_child(node)
 			if object == \"bonuses\":
+				#bonusesAllowed(node.bonusname):
 				$BonusContainer.add_child(node)
 			node.connect(\"pressed\", bonuspurchase.bind(node))
 			bonuses[node.bonusname] = node
 			
 			
-func drawBonuses():
-	# show bonuses when reached year 10,e 15 etc, hide after purchase
-	# 4-8 bonuses total up to 2 at any given moment
+func bonusesAllowed():
+	match game.wave: 
+		1-5:
+			return [\"Better tools\", \"Nuts and bolts\"]
+		6-10:
+			return [\"Fresh Bread\", \"Solar Panels\"]
+	return []
+	# if year < 5 show these 2 bonuses, if year < 10 those two available and if not purchased
+	pass
+	
+	
+func hideifBonus(bonusname):
+	var buildingsData = buildingsData.data
+	for i in buildingsData[\"bonuses\"]:
+		if i.Name == bonusname:
+			bonuses[bonusname].visible = false
 	pass
 
 func _input(event):
@@ -142,13 +155,6 @@ func bonuspurchase(node):
 		print(\"Bonus added: \", node.bonusname, \" \", node.amount)
 	pass
 	
-	
-func hideifBonus(bonusname):
-	var buildingsData = buildingsData.data
-	for i in buildingsData[\"bonuses\"]:
-		if i.Name == bonusname:
-			bonuses[bonusname].visible = false
-	pass
 
 func calcBonusPrice(node) -> int:
 	return node.baseprice*pow(1.15, node.amount)

@@ -9,15 +9,15 @@ data = {
 }, {
 "Desc": "Harvesting is now faster by 20%",
 "Name": "Better tools",
-"Price": 10.0
+"Price": 20.0
 }, {
 "Desc": "Workers twice as efficient",
 "Name": "Fresh Bread",
-"Price": 1000.0
+"Price": 500.0
 }, {
 "Desc": "Speed up harvesters by 10%",
 "Name": "Solar Panels",
-"Price": 1000.0
+"Price": 500.0
 }],
 "buildings": [{
 "Desc": "Harvest  wheat per second",
