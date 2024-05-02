@@ -17,6 +17,12 @@ script/source = "extends Node2D
 @onready var game = get_node(\"/root/GameState\")
 var bonuses : Dictionary = {}
 var buildingsData = preload(\"res://Scripts/buildings.tres\")
+@export var bonusPadding = 16
+@export var buildingPadding = 8
+@export var buildingH = 88
+@export var buildingW = 550
+@export var bonusH = 150
+@export var bonusW = 267
 @onready var bonusprototype = {\"buildings\": preload(\"res://Scenes/buildings.tscn\"), \"bonuses\": preload(\"res://Scenes/bonusess.tscn\")}
 
 # Called when the node enters the scene tree for the first time.
@@ -46,17 +52,28 @@ func drawBuildings():
 			node.price = b[\"Price\"]
 			node.baseprice = node.price
 			node.amount = 0
-			# assign container
+			# moves bonuses down to upgrades and set padding
+		
+				
+			# calculate height of the building
+			var descLenght = len(node.bonusdesc)
+			if descLenght >= 46:
+				var numOfLines = ceil(float(descLenght) / float(46))
+				buildingH += numOfLines*11 
+				node.buttonH = buildingH
+				
 			if object == \"buildings\":
 				$BuildingsContainer.add_child(node)
 			if object == \"bonuses\":
 				$BonusContainer.add_child(node)
 			node.connect(\"pressed\", bonuspurchase.bind(node))
 			bonuses[node.bonusname] = node
-			
+			# function called when signal pressed happend on Button Node
+			# to make separate functions for bonuses, check for buttonname
+			#node.get_node(\"Button\").connect(\"pressed\", bonuspurchase.bind(node))
 			
 func drawBonuses():
-	# show bonuses when reached year 10,e 15 etc, hide after purchase
+	# show bonuses when reached year 10, 15 etc, hide after purchase
 	# 4-8 bonuses total up to 2 at any given moment
 	pass
 
