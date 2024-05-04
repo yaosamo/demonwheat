@@ -53,16 +53,14 @@ func drawBuildings():
 				$BuildingsContainer.add_child(node)
 			if object == \"bonuses\":
 				$BonusContainer.add_child(node)
-				node.visible = false
 			node.connect(\"pressed\", bonuspurchase.bind(node))
 			bonuses[node.bonusname] = node
-	drawBonus()
 			
 func drawBonus():
 	var allowedBonuses = bonusesAllowed()
 	for bon in allowedBonuses:
-		if bonuses[bon].bonusname:
-			bonuses[bon].visible = true
+		if bonuses[bon]:
+			pass
 			
 func bonusesAllowed() -> Array:
 	match game.wave: 
@@ -161,7 +159,6 @@ func bonuspurchase(node):
 		hideifBonus(node.bonusname)
 		node.price = calcBonusPrice(node)
 		print(\"Bonus added: \", node.bonusname, \" \", node.amount)
-		drawBonus()
 	pass
 	
 
