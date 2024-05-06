@@ -18,7 +18,7 @@ script/source = "extends Node2D
 var bonuses : Dictionary = {}
 var buildingsData = preload(\"res://Scripts/buildings.tres\")
 @onready var bonusprototype = {\"buildings\": preload(\"res://Scenes/buildings.tscn\"), \"bonuses\": preload(\"res://Scenes/bonusess.tscn\")}
-
+var freeslots := 2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -60,13 +60,14 @@ func drawBuildings():
 			bonuses[node.bonusname] = node
 			
 func showBonuses():
+	print_debug(\"Slots available: \", freeslots)
 	var allowedBonuses = bonusesAllowed()
 	print_debug(\"Allowed Bonuses: \", bonusesAllowed())
 	for bon in allowedBonuses:
-		for i in 1:
-			if bonuses[bon].amount < 1:
-				print_debug(\"Bonus: \", bonuses[bon].bonusname, bonuses[bon].amount)
-				bonuses[bon].visible = true
+		if bonuses[bon].amount < 1 && freeslots != 0:
+			print_debug(\"Bonus: \", bonuses[bon].bonusname, bonuses[bon].amount)
+			freeslots -= 1
+			bonuses[bon].visible = true
 			
 func bonusesAllowed() -> Array:
 	var w1 := [\"Better tools\", \"Nuts and bolts\"]
@@ -84,6 +85,7 @@ func hideifBonus(bonusname):
 	var buildingsData = buildingsData.data
 	for i in buildingsData[\"bonuses\"]:
 		if i.Name == bonusname:
+			freeslots += 1
 			bonuses[bonusname].visible = false
 	pass
 

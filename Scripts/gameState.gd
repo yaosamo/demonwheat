@@ -5,6 +5,8 @@ extends Node
 var wheat : float
 var wave : int
 
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
