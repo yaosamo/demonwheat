@@ -111,7 +111,7 @@ func startNextWave():
 	$DemonIcon.position.x = maxProgress
 	$"/root/Main/BgMusic".play()
 	$"/root/Main/".saveGame()
-	$"/root/Main/".showBonuses()
+	$"/root/Main/".addBonuses()
 
 func calcQuota() -> int:
 	return baseQuota*pow(1.25, game.wave)

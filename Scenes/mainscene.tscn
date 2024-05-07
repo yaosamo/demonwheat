@@ -18,7 +18,7 @@ script/source = "extends Node2D
 var bonuses : Dictionary = {}
 var buildingsData = preload(\"res://Scripts/buildings.tres\")
 @onready var bonusprototype = {\"buildings\": preload(\"res://Scenes/buildings.tscn\"), \"bonuses\": preload(\"res://Scenes/bonusess.tscn\")}
-
+@onready var bonusslots := 2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -26,7 +26,7 @@ func _ready():
 	$\"/root/Main/yearLabel\".text = str(\"Year \", game.wave+1)
 	drawBuildings()
 	load_game()
-	showBonuses()
+	addBonuses()
 	pass
 
 func drawBuildings():
@@ -59,15 +59,27 @@ func drawBuildings():
 			node.connect(\"pressed\", bonuspurchase.bind(node))
 			bonuses[node.bonusname] = node
 			
-func showBonuses():
+func addBonuses():
 	var allowedBonuses = bonusesAllowed()
-	print_debug(\"Allowed Bonuses: \", bonusesAllowed())
+	print_debug(\"Allowed bonuses: \", allowedBonuses)
 	for bon in allowedBonuses:
-		for i in 1:
-			if bonuses[bon].amount < 1:
-				print_debug(\"Bonus: \", bonuses[bon].bonusname, bonuses[bon].amount)
-				bonuses[bon].visible = true
-			
+		var allowedBonus = bonuses[bon]
+		if allowedBonus.amount < 1 and !allowedBonus.visible and bonusslots > 0:
+			bonuses[bon].visible = true
+			bonusslots -= 1
+			print_debug(\"Free slots : \", bonusslots)
+
+
+func removeBonus(bonusname):
+	var buildingsData = buildingsData.data
+	for i in buildingsData[\"bonuses\"]:
+		if i.Name == bonusname:
+			bonuses[bonusname].visible = false
+			bonusslots += 1
+			print_debug(\"Free slots : \", bonusslots)
+	pass
+
+
 func bonusesAllowed() -> Array:
 	var w1 := [\"Better tools\", \"Nuts and bolts\"]
 	var w2 := [\"Fresh Bread\", \"Solar Panels\"]
@@ -78,14 +90,7 @@ func bonusesAllowed() -> Array:
 			return w1+w2
 	return []
 	pass
-	
-	
-func hideifBonus(bonusname):
-	var buildingsData = buildingsData.data
-	for i in buildingsData[\"bonuses\"]:
-		if i.Name == bonusname:
-			bonuses[bonusname].visible = false
-	pass
+
 
 func _input(event):
 	var fieldClick = $FieldArea.get_node(\"Field\")
@@ -164,10 +169,10 @@ func bonuspurchase(node):
 		game.wheat -= node.price
 		node.amount += 1
 		# Setting price
-		hideifBonus(node.bonusname)
+		removeBonus(node.bonusname)
 		node.price = calcBonusPrice(node)
-		print(\"Bonus added: \", node.bonusname, \" \", node.amount)
-		showBonuses()
+		print(\"Purchased: \", node.bonusname, \" \", node.amount)
+		addBonuses()
 	pass
 	
 
