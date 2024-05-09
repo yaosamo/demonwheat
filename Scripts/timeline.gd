@@ -5,12 +5,12 @@ extends Node2D
 @onready var game = get_node("/root/GameState")
 
 @export var demonCallTime : float = 12
-var speed : float = 2.25 #0.25 def
+var speed : float = 0.25 #0.25 def
 var demonsPresented : bool
 var maxProgress = 12
 var paid = false
 var secondTimer = 10
-var baseQuota = 19 #199 def
+var baseQuota = 199 #199 def
 var currentProgress
 @export var demonQuota : int = 0
 var demonTalk = preload("res://Scripts/demontalk.tres")

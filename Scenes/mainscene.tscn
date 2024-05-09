@@ -262,13 +262,16 @@ offset_top = 192.0
 offset_right = 1712.0
 offset_bottom = 592.0
 theme_override_constants/separation = 6
+metadata/_edit_use_anchors_ = true
 
 [node name="BonusContainer" type="HBoxContainer" parent="."]
 offset_left = 1160.0
 offset_top = 728.0
 offset_right = 1712.0
 offset_bottom = 898.0
+size_flags_horizontal = 0
 theme_override_constants/separation = 6
+metadata/_edit_use_anchors_ = true
 
 [node name="WheatValue" type="Label" parent="."]
 offset_left = 52.0
@@ -316,6 +319,7 @@ theme = ExtResource("1_hvc3h")
 text = "Year #"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Year-wreath_2x" type="Sprite2D" parent="yearLabel"]
 position = Vector2(91.75, 10)
