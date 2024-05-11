@@ -12,11 +12,16 @@ var paid = false
 var secondTimer = 10
 var baseQuota = 199 #199 def
 var currentProgress
+var firstExp := false
 @export var demonQuota : int = 0
 var demonTalk = preload("res://Scripts/demontalk.tres")
 var dialogue = demonTalk.data["dialogues"]
 
 func _ready():
+	# toggle firstExp on if no save 
+	if game.wave == 0:
+		firstExp = true
+	
 	demonQuota = calcQuota()
 	$quotaValueDisplay.text = "Demons quota: %d" % demonQuota
 	pass # Replace with function body.
@@ -24,34 +29,37 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# on demons popup wheat quota
-	$DemAppear/quotaValue.text = "%d wheat" % demonQuota
-
-	if !demonsPresented:
-		# Timer
-		demonCallTime -= speed*delta
-		# Progress in percentages just without multiplying by 100
-		currentProgress = demonCallTime/maxProgress
-		# Maybe add vector point to get it's position as final point
-		$DemonIcon.position.x = lerp(27, 818, currentProgress)
-		$timerLabel.text = str(ceil(demonCallTime), " months til demons")
-
+	if !firstExp:
+		$DemAppear/quotaValue.text = "%d wheat" % demonQuota
+			
+		if !demonsPresented:
+			# Timer
+			demonCallTime -= speed*delta
+			# Progress in percentages just without multiplying by 100
+			currentProgress = demonCallTime/maxProgress
+			# Maybe add vector point to get it's position as final point
+			$DemonIcon.position.x = lerp(27, 818, currentProgress)
+			$timerLabel.text = str(ceil(demonCallTime), " months til demons")
+			
+		if demonCallTime <= 0 and !demonsPresented:
+			$timerLabel.text = "Demons are coming"
+			demonCall()
+			
+		if demonsPresented and $DemAppear/ProgressBar.value > 0:
+			# 100/second timer gives me step step to achieve desired seconds (5 for example) 100/5 = 20*delta therefore 5 sec to 100 
+			$DemAppear/ProgressBar.value -= (100/secondTimer)*delta
+			$DemAppear/lastTimerLabel.text = "Give up in.." + str(ceil($DemAppear/ProgressBar.value/(100/secondTimer)))
+			
+		if $DemAppear/ProgressBar.value < 1 and !paid:
+			death()
+	else:
+		print_debug("Running first time exp")
+		
 	# music stop and play when demons arrive
 	# if demonCallTime <= 4 and !$demonsMus.playing:
 		#$"/root/Main/BgMusic".stop()
 		#$demonsMus.play()
 		#pass
-
-	if demonCallTime <= 0 and !demonsPresented:
-		$timerLabel.text = "Demons are coming"
-		demonCall()
-
-	if demonsPresented and $DemAppear/ProgressBar.value > 0:
-		# 100/second timer gives me step step to achieve desired seconds (5 for example) 100/5 = 20*delta therefore 5 sec to 100 
-		$DemAppear/ProgressBar.value -= (100/secondTimer)*delta
-		$DemAppear/lastTimerLabel.text = "Give up in.." + str(ceil($DemAppear/ProgressBar.value/(100/secondTimer)))
-
-	if $DemAppear/ProgressBar.value < 1 and !paid:
-		death()
 
 
 func demonCall():

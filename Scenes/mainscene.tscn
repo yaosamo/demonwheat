@@ -221,6 +221,7 @@ func load_game():
 
 		# Get the data from the JSON object
 		var saved_data = json.get_data()
+		
 		if saved_data:
 			# Operations
 			game.wheat = saved_data.operations[\"wheatValue\"]
