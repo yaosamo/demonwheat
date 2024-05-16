@@ -107,11 +107,72 @@ text = "Demons quota: 100,000 wheat"
 vertical_alignment = 1
 
 [node name="DemAppear" type="Node2D" parent="."]
-visible = false
-position = Vector2(8, -416)
+position = Vector2(-16, -356)
+metadata/_edit_group_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="DemAppear"]
+offset_left = 32.0
+offset_right = 352.0
+offset_bottom = 327.0
+theme = ExtResource("1_nfvnf")
+
+[node name="CenterContainer" type="CenterContainer" parent="DemAppear/PanelContainer"]
+layout_mode = 2
+theme = ExtResource("1_nfvnf")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DemAppear/PanelContainer/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="DemAppear/PanelContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = -40
+
+[node name="quotaText" type="Label" parent="DemAppear/PanelContainer/CenterContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_7ch7x")
+theme_override_font_sizes/font_size = 24
+text = "The quota is
+"
+
+[node name="quotaValue" type="Label" parent="DemAppear/PanelContainer/CenterContainer/VBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_v0ruc")
+theme_override_font_sizes/font_size = 32
+text = "120,000 wheat"
+
+[node name="payQ" type="Button" parent="DemAppear/PanelContainer/CenterContainer/VBoxContainer"]
+auto_translate_mode = 1
+layout_mode = 2
+theme_override_colors/font_color = Color(0.882353, 0.827451, 0.694118, 1)
+theme_override_fonts/font = ExtResource("8_7ch7x")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_voxxt")
+text = "Pay"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DemAppear/PanelContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="lastTimerLabel" type="Label" parent="DemAppear/PanelContainer/CenterContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_7ch7x")
+text = "Give up in..3"
+
+[node name="ProgressBar" type="ProgressBar" parent="DemAppear/PanelContainer/CenterContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_oa1bj")
+theme_override_styles/fill = SubResource("StyleBoxFlat_n4ip4")
+value = 100.0
+show_percentage = false
 
 [node name="bg" type="Button" parent="DemAppear"]
 auto_translate_mode = 1
+visible = false
 offset_right = 338.0
 offset_bottom = 390.0
 theme_override_styles/focus = ExtResource("6_4nhx4")
@@ -121,82 +182,43 @@ disabled = true
 button_mask = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="payQ" type="Button" parent="DemAppear"]
-auto_translate_mode = 1
+[node name="Control" type="Control" parent="DemAppear"]
+layout_mode = 3
+anchors_preset = 0
 offset_left = 40.0
-offset_top = 197.0
-offset_right = 300.0
-offset_bottom = 269.0
-theme_override_colors/font_color = Color(0.882353, 0.827451, 0.694118, 1)
-theme_override_fonts/font = ExtResource("8_7ch7x")
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxFlat_voxxt")
-text = "Pay"
+offset_top = -80.0
+offset_right = 330.0
+offset_bottom = 40.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+metadata/_edit_group_ = true
 
-[node name="quotaText" type="Label" parent="DemAppear"]
-offset_left = 40.0
-offset_top = 64.0
-offset_right = 264.0
-offset_bottom = 127.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("8_7ch7x")
-theme_override_font_sizes/font_size = 24
-text = "The quota is
-"
-
-[node name="quotaValue" type="Label" parent="DemAppear"]
-offset_left = 40.0
-offset_top = 91.0
-offset_right = 308.0
-offset_bottom = 175.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("9_v0ruc")
-theme_override_font_sizes/font_size = 32
-text = "120,000 wheat"
-
-[node name="ProgressBar" type="ProgressBar" parent="DemAppear"]
-offset_left = 45.0
-offset_top = 341.0
-offset_right = 295.0
-offset_bottom = 354.0
-theme_override_styles/background = SubResource("StyleBoxFlat_oa1bj")
-theme_override_styles/fill = SubResource("StyleBoxFlat_n4ip4")
-value = 100.0
-show_percentage = false
-
-[node name="lastTimerLabel" type="Label" parent="DemAppear"]
-offset_left = 40.0
-offset_top = 289.0
-offset_right = 150.0
-offset_bottom = 332.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("8_7ch7x")
-text = "Give up in..3"
-
-[node name="MiniDemon_2x" type="Sprite2D" parent="DemAppear"]
-position = Vector2(64, 6)
+[node name="MiniDemon_2x" type="Sprite2D" parent="DemAppear/Control"]
+position = Vector2(40.5, 46)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("8_l8e1k")
 
-[node name="Talk-tail_2x" type="Sprite2D" parent="DemAppear"]
-position = Vector2(93, 20)
+[node name="Talk-tail_2x" type="Sprite2D" parent="DemAppear/Control"]
+position = Vector2(69.5, 60)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("11_d28d8")
 
-[node name="talkBubble" type="PanelContainer" parent="DemAppear"]
-offset_left = 96.0
-offset_top = -32.0
-offset_right = 304.0
-offset_bottom = 56.0
+[node name="talkBubble" type="PanelContainer" parent="DemAppear/Control"]
+unique_name_in_owner = true
+offset_left = 72.5
+offset_top = 8.0
+offset_right = 280.5
+offset_bottom = 96.0
 size_flags_horizontal = 0
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_811cw")
 
-[node name="talk" type="Label" parent="DemAppear"]
-offset_left = 109.0
-offset_top = -38.0
-offset_right = 315.0
-offset_bottom = 60.0
+[node name="talk" type="Label" parent="DemAppear/Control"]
+unique_name_in_owner = true
+offset_left = 85.5
+offset_top = 2.0
+offset_right = 291.5
+offset_bottom = 96.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_constants/line_spacing = -28
 theme_override_fonts/font = ExtResource("8_7ch7x")
@@ -205,4 +227,4 @@ text = "test"
 vertical_alignment = 1
 autowrap_mode = 3
 
-[connection signal="pressed" from="DemAppear/payQ" to="." method="_on_pay_q_pressed"]
+[connection signal="pressed" from="DemAppear/PanelContainer/CenterContainer/VBoxContainer/payQ" to="." method="_on_pay_q_pressed"]

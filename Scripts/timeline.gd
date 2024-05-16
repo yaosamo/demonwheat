@@ -10,7 +10,7 @@ var demonsPresented : bool
 var maxProgress = 12
 var paid = false
 var secondTimer = 10
-var baseQuota = 199 #199 def
+var baseQuota = 30 #199 def
 var currentProgress
 var firstExp := false
 @export var demonQuota : int = 0
@@ -45,15 +45,17 @@ func _process(delta):
 			$timerLabel.text = "Demons are coming"
 			demonCall()
 			
-		if demonsPresented and $DemAppear/ProgressBar.value > 0:
+		if demonsPresented and %ProgressBar.value > 0:
 			# 100/second timer gives me step step to achieve desired seconds (5 for example) 100/5 = 20*delta therefore 5 sec to 100 
-			$DemAppear/ProgressBar.value -= (100/secondTimer)*delta
-			$DemAppear/lastTimerLabel.text = "Give up in.." + str(ceil($DemAppear/ProgressBar.value/(100/secondTimer)))
+			%ProgressBar.value -= (100/secondTimer)*delta
+			$DemAppear/lastTimerLabel.text = "Give up in.." + str(ceil(%ProgressBar.value/(100/secondTimer)))
 			
-		if $DemAppear/ProgressBar.value < 1 and !paid:
+		if %ProgressBar.value < 1 and !paid:
 			death()
 	else:
-		print_debug("Running first time exp")
+		if game.wheat > 9:
+			demonCall()
+			print_debug("Running first time exp")
 		
 	# music stop and play when demons arrive
 	# if demonCallTime <= 4 and !$demonsMus.playing:
@@ -66,8 +68,8 @@ func demonCall():
 	# calculating size of the bubble
 	var SpeechNum = randi() % dialogue.size()
 	var Speech = dialogue[SpeechNum]
-	$DemAppear/talk.text = Speech
-	$DemAppear/talkBubble.size = Vector2($DemAppear/talk.size.x+24, $DemAppear/talk.size.y-4)
+	%talk.text = Speech
+	%talkBubble.size = Vector2(%talk.size.x+24, %talk.size.y-4)
 	# add 10s timer if not paid by then goto death
 	$DemAppear.visible = true
 	demonsPresented = true
