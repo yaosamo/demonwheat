@@ -107,9 +107,9 @@ texture = ExtResource("4_2f5x6")
 [node name="StartCtrl" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 800.0
+offset_left = 792.0
 offset_top = 600.0
-offset_right = 1200.0
+offset_right = 1192.0
 offset_bottom = 740.0
 script = ExtResource("5_max76")
 target_scene = ExtResource("2_7xdae")
@@ -121,9 +121,10 @@ anchor_left = 0.0192306
 anchor_top = 0.0124886
 anchor_right = 0.0192306
 anchor_bottom = 0.0124886
-offset_left = 56.0
-offset_right = 262.0
-offset_bottom = 105.0
+offset_left = 30.0
+offset_top = 3.49699
+offset_right = 236.0
+offset_bottom = 108.497
 scale = Vector2(1.4, 1.4)
 pivot_offset = Vector2(47, 28)
 size_flags_horizontal = 4
@@ -136,9 +137,9 @@ text = "Continue"
 auto_translate_mode = 1
 layout_mode = 3
 anchors_preset = 0
-offset_left = 800.0
+offset_left = 792.0
 offset_top = 745.0
-offset_right = 1200.0
+offset_right = 1192.0
 offset_bottom = 885.0
 script = ExtResource("7_4t7xi")
 
@@ -146,13 +147,13 @@ script = ExtResource("7_4t7xi")
 auto_translate_mode = 1
 layout_mode = 1
 anchors_preset = -1
-anchor_left = -0.00728354
+anchor_left = -0.00728358
 anchor_top = 0.0149226
 anchor_right = -0.00728358
 anchor_bottom = 0.0149236
-offset_left = 58.9134
-offset_top = -2.08917
-offset_right = 264.913
+offset_left = 32.9134
+offset_top = -2.08916
+offset_right = 238.913
 offset_bottom = 102.911
 scale = Vector2(1.4, 1.4)
 pivot_offset = Vector2(47, 28)
@@ -162,7 +163,6 @@ theme_override_fonts/font = ExtResource("6_bqqse")
 theme_override_font_sizes/font_size = 40
 text = "Quit
 "
-metadata/_edit_use_anchors_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -171,12 +171,12 @@ libraries = {
 
 [node name="Label" type="Label" parent="."]
 offset_left = 316.0
-offset_top = 1007.0
-offset_right = 500.0
-offset_bottom = 1060.0
+offset_top = 985.0
+offset_right = 549.0
+offset_bottom = 1038.0
 theme_override_colors/font_color = Color(1, 0.805, 0.22, 1)
 theme_override_fonts/font = ExtResource("6_bqqse")
 theme_override_font_sizes/font_size = 20
-text = "by Creative Club
+text = "Creative Club Games
 "
 metadata/_edit_use_anchors_ = true

@@ -13,6 +13,7 @@ var secondTimer = 10
 var baseQuota = 30 #199 def
 var currentProgress
 var firstExp := false
+var firstExpStarted := false
 @export var demonQuota : int = 0
 var demonTalk = preload("res://Scripts/demontalk.tres")
 var dialogue = demonTalk.data["dialogues"]
@@ -53,9 +54,9 @@ func _process(delta):
 		if %ProgressBar.value < 1 and !paid:
 			death()
 	else:
-		if game.wheat > 9:
-			demonCall()
-			print_debug("Running first time exp")
+		if game.wheat > 9 and !firstExpStarted:
+			#firstExpStarted = true
+			demonCall("")
 		
 	# music stop and play when demons arrive
 	# if demonCallTime <= 4 and !$demonsMus.playing:
@@ -64,12 +65,11 @@ func _process(delta):
 		#pass
 
 
-func demonCall():
+func demonCall(talk_text := ""):
+	if firstExpStarted:
+		%payQ.text = "OK"
 	# calculating size of the bubble
-	var SpeechNum = randi() % dialogue.size()
-	var Speech = dialogue[SpeechNum]
-	%talk.text = Speech
-	%talkBubble.size = Vector2(%talk.size.x+24, %talk.size.y-4)
+	%talk.text = talk_text if talk_text else dialogue.pick_random()
 	# add 10s timer if not paid by then goto death
 	$DemAppear.visible = true
 	demonsPresented = true
@@ -93,6 +93,8 @@ func death():
 
 
 func _on_pay_q_pressed() -> void:
+	if firstExpStarted:
+		$DemAppear.visible = false
 	#check if wheat is available
 	if game.wheat >= demonQuota:
 		game.wheat -= demonQuota
