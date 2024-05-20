@@ -20,23 +20,26 @@ var dialogue = demonTalk.data["dialogues"]
 var fExp_step := 1
 	
 func _ready():
-	print_debug("firstExpEnded is ", firstExpEnded)
+
 	# toggle firstExp on if no save 
 	if game.wave == 0:
 		firstExpStarted = false
 		firstExpEnded = false
-		print_debug("firstExpEnded is ", firstExpEnded, game.wave)
+		print_debug("firstExpEnded is ", firstExpEnded, " -- and wave is.. ", game.wave)
 	
 	demonQuota = calcQuota()
 	$quotaValueDisplay.text = "Demons quota: %d" % demonQuota
 	pass # Replace with function body.
 
+func _signal():
+	print_debug("Poshel nahoooi")
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	var emitter = $"/root/Main/"
+	print_debug("emitter ", emitter.connect("sos", _signal.bind()))
 	# on demons popup wheat quota
-	
 	if firstExpEnded:
-		print_debug("All goose")
 		%quotaValue.text = "%d wheat" % demonQuota
 			
 		if !demonsPresented:

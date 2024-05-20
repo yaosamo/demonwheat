@@ -1,0 +1,235 @@
+[gd_scene load_steps=16 format=3 uid="uid://xmmt1r1up00r"]
+
+[ext_resource type="Script" path="res://Scripts/timeline.gd" id="1_knsao"]
+[ext_resource type="Theme" uid="uid://b4h3syf1usohg" path="res://theme.tres" id="1_nfvnf"]
+[ext_resource type="PackedScene" uid="uid://cyhpg6u26al60" path="res://Scenes/gameover.tscn" id="2_dcogd"]
+[ext_resource type="Texture2D" uid="uid://n7obiibjqldp" path="res://Graphics/Timeline@2x.png" id="3_4285u"]
+[ext_resource type="Texture2D" uid="uid://ccg6ri6ptvvag" path="res://Graphics/DemonIcon@2x.png" id="4_8fbct"]
+[ext_resource type="AudioStream" uid="uid://s5et63oa7lef" path="res://Sounds/demons.mp3" id="5_7vb1x"]
+[ext_resource type="StyleBox" uid="uid://27f41n6ctu6m" path="res://demon_appBG.tres" id="6_4nhx4"]
+[ext_resource type="FontFile" uid="uid://6itpgf18f3a8" path="res://fonts/InknutAntiqua-Regular.ttf" id="8_7ch7x"]
+[ext_resource type="Texture2D" uid="uid://cg3l6biqxac6n" path="res://Graphics/miniDemon@2x.png" id="8_l8e1k"]
+[ext_resource type="FontFile" uid="uid://bkkgassk31pox" path="res://fonts/InknutAntiqua-Bold.ttf" id="9_v0ruc"]
+[ext_resource type="Texture2D" uid="uid://b6sgb586nfslb" path="res://Graphics/talk-tail@2x.png" id="11_d28d8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_voxxt"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oa1bj"]
+bg_color = Color(0.882353, 1, 0.694118, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n4ip4"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ihhq"]
+content_margin_left = 18.0
+content_margin_right = 18.0
+bg_color = Color(1, 0.952941, 0.835294, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Timeline" type="Node2D" groups=["Persist"]]
+script = ExtResource("1_knsao")
+game_over_scene = ExtResource("2_dcogd")
+
+[node name="timerLabel" type="Label" parent="."]
+offset_left = 665.0
+offset_top = 80.0
+offset_right = 833.0
+offset_bottom = 104.0
+theme = ExtResource("1_nfvnf")
+theme_override_font_sizes/font_size = 16
+text = "12 months til demons"
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Timeline_2x" type="Sprite2D" parent="."]
+position = Vector2(421.12, 32)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_4285u")
+
+[node name="Now" type="Label" parent="."]
+offset_left = 13.0
+offset_top = 80.0
+offset_right = 77.0
+offset_bottom = 104.0
+theme = ExtResource("1_nfvnf")
+theme_override_font_sizes/font_size = 16
+text = "Now
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="DemonIcon" type="Sprite2D" parent="."]
+position = Vector2(818, 35)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_8fbct")
+
+[node name="demonsMus" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_7vb1x")
+volume_db = -10.0
+
+[node name="quotaValueDisplay" type="Label" parent="."]
+auto_translate_mode = 1
+offset_left = 16.0
+offset_top = -72.0
+offset_right = 318.0
+offset_bottom = -25.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_7ch7x")
+theme_override_font_sizes/font_size = 18
+text = "Demons quota: 100,000 wheat"
+vertical_alignment = 1
+
+[node name="DemAppear" type="Node2D" parent="."]
+visible = false
+position = Vector2(-16, -356)
+
+[node name="PanelContainer" type="PanelContainer" parent="DemAppear"]
+offset_left = 32.0
+offset_top = -4.0
+offset_right = 392.0
+offset_bottom = 331.0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme = ExtResource("1_nfvnf")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DemAppear/PanelContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 16
+
+[node name="vContainerTop" type="VBoxContainer" parent="DemAppear/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = -38
+
+[node name="quotaText" type="Label" parent="DemAppear/PanelContainer/VBoxContainer/vContainerTop"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_7ch7x")
+theme_override_font_sizes/font_size = 24
+text = "The quota is
+"
+
+[node name="quotaValue" type="Label" parent="DemAppear/PanelContainer/VBoxContainer/vContainerTop"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("9_v0ruc")
+theme_override_font_sizes/font_size = 32
+text = "30 wheat"
+
+[node name="payQ" type="Button" parent="DemAppear/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+auto_translate_mode = 1
+layout_mode = 2
+theme_override_colors/font_color = Color(0.882353, 0.827451, 0.694118, 1)
+theme_override_fonts/font = ExtResource("8_7ch7x")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_voxxt")
+text = "Pay"
+
+[node name="vContainerBottom" type="VBoxContainer" parent="DemAppear/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+
+[node name="lastTimerLabel" type="Label" parent="DemAppear/PanelContainer/VBoxContainer/vContainerBottom"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("8_7ch7x")
+text = "Give up in..3"
+
+[node name="ProgressBar" type="ProgressBar" parent="DemAppear/PanelContainer/VBoxContainer/vContainerBottom"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_oa1bj")
+theme_override_styles/fill = SubResource("StyleBoxFlat_n4ip4")
+value = 100.0
+show_percentage = false
+
+[node name="bg" type="Button" parent="DemAppear"]
+auto_translate_mode = 1
+visible = false
+offset_right = 338.0
+offset_bottom = 390.0
+theme_override_styles/focus = ExtResource("6_4nhx4")
+theme_override_styles/disabled = ExtResource("6_4nhx4")
+theme_override_styles/normal = ExtResource("6_4nhx4")
+disabled = true
+button_mask = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Control" type="Control" parent="DemAppear"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 40.0
+offset_top = -80.0
+offset_right = 330.0
+offset_bottom = 40.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
+
+[node name="MiniDemon_2x" type="Sprite2D" parent="DemAppear/Control"]
+position = Vector2(40.5, 46)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_l8e1k")
+
+[node name="Talk-tail_2x" type="Sprite2D" parent="DemAppear/Control"]
+position = Vector2(69.5, 60)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("11_d28d8")
+
+[node name="PanelContainer" type="PanelContainer" parent="DemAppear/Control"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = -2.0
+offset_right = 368.0
+offset_bottom = 96.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_3ihhq")
+
+[node name="talk" type="Label" parent="DemAppear/Control/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -28
+theme_override_fonts/font = ExtResource("8_7ch7x")
+theme_override_font_sizes/font_size = 24
+text = "Hello, I'm a test demon lol"
+vertical_alignment = 1
+autowrap_mode = 3
+
+[connection signal="pressed" from="DemAppear/PanelContainer/VBoxContainer/payQ" to="." method="_on_pay_q_pressed"]

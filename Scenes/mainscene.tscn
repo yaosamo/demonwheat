@@ -19,15 +19,16 @@ var bonuses : Dictionary = {}
 var buildingsData = preload(\"res://Scripts/buildings.tres\")
 @onready var bonusprototype = {\"buildings\": preload(\"res://Scenes/buildings.tscn\"), \"bonuses\": preload(\"res://Scenes/bonusess.tscn\")}
 @onready var bonusslots := 2
+var loaded := false
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	print_debug(\"am I first?\")
+	print_debug(\"Last lol \")
 	# update label
 	$\"/root/Main/yearLabel\".text = str(\"Year \", game.wave+1)
 	drawBuildings()
 	load_game()
 	addBonuses()
+	
 	pass
 
 func drawBuildings():
@@ -202,6 +203,7 @@ func save() -> Dictionary:
 
 
 func load_game():
+	emit_signal(\"sos\")
 	if not FileAccess.file_exists(\"user://savegame.save\"):
 		return # Error! We don't have a save to load.
 
