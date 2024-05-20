@@ -12,16 +12,20 @@ var paid = false
 var secondTimer = 10
 var baseQuota = 30 #199 def
 var currentProgress
-var firstExp := false
-var firstExpStarted := false
+var firstExpEnded := true
+var firstExpStarted : bool
 @export var demonQuota : int = 0
 var demonTalk = preload("res://Scripts/demontalk.tres")
 var dialogue = demonTalk.data["dialogues"]
-
+var fExp_step := 1
+	
 func _ready():
+	print_debug("firstExpEnded is ", firstExpEnded)
 	# toggle firstExp on if no save 
 	if game.wave == 0:
-		firstExp = true
+		firstExpStarted = false
+		firstExpEnded = false
+		print_debug("firstExpEnded is ", firstExpEnded, game.wave)
 	
 	demonQuota = calcQuota()
 	$quotaValueDisplay.text = "Demons quota: %d" % demonQuota
@@ -30,8 +34,10 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# on demons popup wheat quota
-	if !firstExp:
-		$DemAppear/quotaValue.text = "%d wheat" % demonQuota
+	
+	if firstExpEnded:
+		print_debug("All goose")
+		%quotaValue.text = "%d wheat" % demonQuota
 			
 		if !demonsPresented:
 			# Timer
@@ -49,14 +55,14 @@ func _process(delta):
 		if demonsPresented and %ProgressBar.value > 0:
 			# 100/second timer gives me step step to achieve desired seconds (5 for example) 100/5 = 20*delta therefore 5 sec to 100 
 			%ProgressBar.value -= (100/secondTimer)*delta
-			$DemAppear/lastTimerLabel.text = "Give up in.." + str(ceil(%ProgressBar.value/(100/secondTimer)))
+			%lastTimerLabel.text = "Give up in.." + str(ceil(%ProgressBar.value/(100/secondTimer)))
 			
 		if %ProgressBar.value < 1 and !paid:
 			death()
 	else:
-		if game.wheat > 9 and !firstExpStarted:
-			#firstExpStarted = true
-			demonCall("")
+		if game.wheat > 9 and game.wave == 0 and !firstExpStarted:
+			firstExpStarted = true
+			demonCall("Oh-oh so you're new farmer here?")
 		
 	# music stop and play when demons arrive
 	# if demonCallTime <= 4 and !$demonsMus.playing:
@@ -65,9 +71,33 @@ func _process(delta):
 		#pass
 
 
+func firstExpFlow(step):
+	match step:
+		1:
+			%payQ.text = "Hmm, yes, why?"
+			%vContainerTop.visible = false
+			%vContainerBottom.visible = false
+			fExp_step += 1
+		2:
+			%talk.text = "I’ll be back in a year and your next year quota is"
+			%payQ.text = "Ugh, ok"
+			%vContainerTop.visible = true
+			firstExpStarted = false
+			fExp_step += 1
+		3:
+			print_debug("Time to start the game")
+			firstExpEnded = true
+			#reset demon
+			demonsPresented = false
+			%ProgressBar.value = 100
+			$DemAppear.visible = false
+			%vContainerBottom.visible = true
+			
+			
+
 func demonCall(talk_text := ""):
 	if firstExpStarted:
-		%payQ.text = "OK"
+		firstExpFlow(fExp_step)
 	# calculating size of the bubble
 	%talk.text = talk_text if talk_text else dialogue.pick_random()
 	# add 10s timer if not paid by then goto death
@@ -94,14 +124,15 @@ func death():
 
 func _on_pay_q_pressed() -> void:
 	if firstExpStarted:
-		$DemAppear.visible = false
+		firstExpFlow(fExp_step)
+		#refactor so it uses separate function for the flow
 	#check if wheat is available
 	if game.wheat >= demonQuota:
 		game.wheat -= demonQuota
 		print_debug("paid")
 		paid = true
 		demonsPresented = false
-		$DemAppear/ProgressBar.value = 100
+		%ProgressBar.value = 100
 		$DemAppear.visible = false
 		print_debug("Demons are invisible")
 		$demonsMus.stop()

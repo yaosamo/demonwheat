@@ -22,7 +22,7 @@ var buildingsData = preload(\"res://Scripts/buildings.tres\")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print_debug(\"am I first?\")
+	print_debug(\"I first?\")
 	# update label
 	$\"/root/Main/yearLabel\".text = str(\"Year \", game.wave+1)
 	drawBuildings()
@@ -240,7 +240,7 @@ func load_game():
 				print_debug(\"3arpy3ka 6oHycoB \", b, \" -> \", bonuses[b].amount)
 "
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" groups=["Persist"]]
 script = SubResource("GDScript_s2meh")
 
 [node name="Bg" type="Sprite2D" parent="."]
