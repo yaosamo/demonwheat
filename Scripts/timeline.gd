@@ -7,12 +7,12 @@ extends Node2D
 @export var demonCallTime : float = 12
 var speed : float = 0.25 #0.25 def
 var demonsPresented : bool
-var maxProgress = 12
-var paid = false
-var secondTimer = 10
-var baseQuota = 30 #199 def
+var maxProgress := 12
+var paid := false
+var secondTimer := 10
+var baseQuota := 30 #199 def
 var currentProgress
-var firstExpEnded := true
+var firstExpEnded : bool
 var firstExpStarted : bool
 @export var demonQuota : int = 0
 var demonTalk = preload("res://Scripts/demontalk.tres")
@@ -20,24 +20,16 @@ var dialogue = demonTalk.data["dialogues"]
 var fExp_step := 1
 	
 func _ready():
-
+	firstExpEnded = false
+	firstExpStarted = false
 	# toggle firstExp on if no save 
-	if game.wave == 0:
-		firstExpStarted = false
-		firstExpEnded = false
-		print_debug("firstExpEnded is ", firstExpEnded, " -- and wave is.. ", game.wave)
-	
 	demonQuota = calcQuota()
 	$quotaValueDisplay.text = "Demons quota: %d" % demonQuota
 	pass # Replace with function body.
 
-func _signal():
-	print_debug("Poshel nahoooi")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var emitter = $"/root/Main/"
-	print_debug("emitter ", emitter.connect("sos", _signal.bind()))
 	# on demons popup wheat quota
 	if firstExpEnded:
 		%quotaValue.text = "%d wheat" % demonQuota
@@ -66,6 +58,8 @@ func _process(delta):
 		if game.wheat > 9 and game.wave == 0 and !firstExpStarted:
 			firstExpStarted = true
 			demonCall("Oh-oh so you're new farmer here?")
+		if game.wave > 0:
+			firstExpEnded = true
 		
 	# music stop and play when demons arrive
 	# if demonCallTime <= 4 and !$demonsMus.playing:
@@ -77,18 +71,20 @@ func _process(delta):
 func firstExpFlow(step):
 	match step:
 		1:
+			print_debug("First step")
 			%payQ.text = "Hmm, yes, why?"
 			%vContainerTop.visible = false
 			%vContainerBottom.visible = false
 			fExp_step += 1
 		2:
+			print_debug("Second step")
 			%talk.text = "I’ll be back in a year and your next year quota is"
 			%payQ.text = "Ugh, ok"
 			%vContainerTop.visible = true
-			firstExpStarted = false
 			fExp_step += 1
 		3:
 			print_debug("Time to start the game")
+			firstExpStarted = false
 			firstExpEnded = true
 			#reset demon
 			demonsPresented = false

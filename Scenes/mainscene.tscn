@@ -203,7 +203,6 @@ func save() -> Dictionary:
 
 
 func load_game():
-	emit_signal(\"sos\")
 	if not FileAccess.file_exists(\"user://savegame.save\"):
 		return # Error! We don't have a save to load.
 
