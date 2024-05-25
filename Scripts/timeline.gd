@@ -78,7 +78,7 @@ func firstExpFlow(step):
 			fExp_step += 1
 		2:
 			print_debug("Second step")
-			%talk.text = "I’ll be back in a year and your next year quota is"
+			%talk.text = "I’ll be back in a year and..."
 			%payQ.text = "Ugh, ok"
 			%vContainerTop.visible = true
 			fExp_step += 1
@@ -126,7 +126,7 @@ func _on_pay_q_pressed() -> void:
 		firstExpFlow(fExp_step)
 		#refactor so it uses separate function for the flow
 	#check if wheat is available
-	if game.wheat >= demonQuota:
+	if game.wheat >= demonQuota and firstExpEnded:
 		game.wheat -= demonQuota
 		print_debug("paid")
 		paid = true

@@ -92,6 +92,7 @@ amount = 50
 process_material = SubResource("ParticleProcessMaterial_cis82")
 texture = ExtResource("8_r8xxy")
 lifetime = 8.0
+preprocess = 10.0
 randomness = 1.0
 
 [node name="Demonimage_2x" type="Sprite2D" parent="."]

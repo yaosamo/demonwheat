@@ -1,12 +1,75 @@
-[gd_scene format=3 uid="uid://cyhpg6u26al60"]
+[gd_scene load_steps=6 format=3 uid="uid://cyhpg6u26al60"]
+
+[ext_resource type="Theme" uid="uid://b4h3syf1usohg" path="res://theme.tres" id="1_gevf1"]
+[ext_resource type="Texture2D" uid="uid://cxbo0my38drny" path="res://Graphics/start/demonimage@2x.png" id="2_tq7lt"]
+[ext_resource type="FontFile" uid="uid://6itpgf18f3a8" path="res://fonts/InknutAntiqua-Regular.ttf" id="3_h3oh8"]
+
+[sub_resource type="Gradient" id="Gradient_nq805"]
+colors = PackedColorArray(0.239216, 0.0156863, 0.0156863, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_i4fot"]
+gradient = SubResource("Gradient_nq805")
+fill_from = Vector2(0.681624, 0)
+fill_to = Vector2(0, 0.151709)
 
 [node name="GameOver" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 1929.0
+offset_top = -8.0
+offset_right = 3034.0
+offset_bottom = 1921.0
+rotation = 1.5708
+theme = ExtResource("1_gevf1")
+texture = SubResource("GradientTexture2D_i4fot")
 
 [node name="Label" type="Label" parent="."]
 offset_left = 808.0
 offset_top = 480.0
 offset_right = 1125.0
 offset_bottom = 563.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 60
 text = "Game over"
+
+[node name="deathstats" type="Label" parent="."]
+offset_left = 824.0
+offset_top = 32.0
+offset_right = 1095.0
+offset_bottom = 120.0
+text = "You lasted 4 years and 20.5k wheat"
+
+[node name="Restart_btn" type="Button" parent="."]
+offset_left = 856.0
+offset_top = 616.0
+offset_right = 1104.0
+offset_bottom = 688.0
+theme = ExtResource("1_gevf1")
+text = "Start again"
+
+[node name="Button" type="Button" parent="."]
+offset_left = 848.0
+offset_top = 704.0
+offset_right = 1096.0
+offset_bottom = 776.0
+theme = ExtResource("1_gevf1")
+text = "Quit
+"
+
+[node name="Demonimage_2x" type="Sprite2D" parent="."]
+position = Vector2(440, 661)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_tq7lt")
+
+[node name="Label2" type="Label" parent="."]
+auto_translate_mode = 1
+offset_left = 316.0
+offset_top = 985.0
+offset_right = 549.0
+offset_bottom = 1038.0
+theme_override_colors/font_color = Color(1, 0.805, 0.22, 1)
+theme_override_fonts/font = ExtResource("3_h3oh8")
+theme_override_font_sizes/font_size = 20
+text = "Creative Club Games
+"
+metadata/_edit_use_anchors_ = true
