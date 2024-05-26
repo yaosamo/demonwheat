@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://d1e2571xwnapu"]
+
+[ext_resource type="Texture2D" uid="uid://cg3l6biqxac6n" path="res://Graphics/miniDemon@2x.png" id="1_1jyx0"]
+[ext_resource type="Script" path="res://Scripts/unitbuilding.gd" id="1_momiq"]
+
+[sub_resource type="Curve" id="Curve_83s4j"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.184971, 1), 0.0, 0.0, 0, 0, Vector2(0.861272, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_rx7pn"]
+curve = SubResource("Curve_83s4j")
+
+[sub_resource type="Curve" id="Curve_pivy5"]
+_data = [Vector2(0, 0.70368), 0.0, 0.0, 0, 0, Vector2(0.425819, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_460vg"]
+curve = SubResource("Curve_pivy5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2g5jn"]
+particle_flag_disable_z = true
+angle_min = -1.99999
+angle_max = 2.00001
+scale_min = 0.3
+scale_max = 0.4
+scale_curve = SubResource("CurveTexture_460vg")
+alpha_curve = SubResource("CurveTexture_rx7pn")
+
+[node name="Building" type="Node2D"]
+script = ExtResource("1_momiq")
+
+[node name="unit" type="GPUParticles2D" parent="."]
+position = Vector2(96, 96)
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_2g5jn")
+texture = ExtResource("1_1jyx0")
+lifetime = 1.8
+
+[node name="posend" type="Node2D" parent="."]
+visible = false
+position = Vector2(776, 568)

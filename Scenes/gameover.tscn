@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cyhpg6u26al60"]
 
 [ext_resource type="Theme" uid="uid://b4h3syf1usohg" path="res://theme.tres" id="1_gevf1"]
-[ext_resource type="Script" path="res://Scenes/gameover.gd" id="1_k3bso"]
+[ext_resource type="Script" path="res://gameover.gd" id="1_k3bso"]
 [ext_resource type="Texture2D" uid="uid://cxbo0my38drny" path="res://Graphics/start/demonimage@2x.png" id="2_tq7lt"]
 [ext_resource type="FontFile" uid="uid://6itpgf18f3a8" path="res://fonts/InknutAntiqua-Regular.ttf" id="3_h3oh8"]
 [ext_resource type="Texture2D" uid="uid://cjh3t036mu2br" path="res://Graphics/start/particles@2x.png" id="4_cpstn"]
