@@ -4,7 +4,7 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$deathstats.text = str("You lasted ", game.deathstats[1], " years and ", game.deathstats[0]," wheat")
+	$deathstats.text = str("You lasted ", game.deathstats[1], " years and gathered ", game.deathstats[0]," wheat")
 	pass # Replace with function body.
 
 
