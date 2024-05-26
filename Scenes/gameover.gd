@@ -1,15 +1,10 @@
-extends Node
+extends Node2D
 
-# list of vars here and will be pulled into other scripts and used
-# then i'll ve saving values from this object and loading to this object
-var wheat : float
-var wave : int
-var deathstats : Array
-
+@onready var game = get_node("/root/GameState")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	
+	$deathstats.text = str("You lasted ", game.deathstats[1], " years and ", game.deathstats[0]," wheat")
 	pass # Replace with function body.
 
 

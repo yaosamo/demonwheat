@@ -108,6 +108,7 @@ func demonCall(talk_text := ""):
 	
 func death():
 	# clear save record
+	game.deathstats = [game.wheat, game.wave]
 	game.wheat = 0
 	game.wave = 0
 	var save_file = FileAccess.open("user://savegame.save", FileAccess.WRITE)
