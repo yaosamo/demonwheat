@@ -22,8 +22,8 @@ var buildingsData = preload(\"res://Scripts/buildings.tres\")
 var loaded := false
 
 func _ready():
-	print_debug(\"Last lol \")
 	# update label
+	$BgMusic.play()
 	$\"/root/Main/yearLabel\".text = str(\"Year \", game.wave+1)
 	drawBuildings()
 	load_game()
@@ -307,10 +307,11 @@ position = Vector2(80, 848)
 
 [node name="BgMusic" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_em6ej")
-volume_db = 10.0
+volume_db = -3.152
 
 [node name="vshik" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_qqqaa")
+volume_db = -8.509
 
 [node name="yearLabel" type="Label" parent="."]
 offset_left = 136.0

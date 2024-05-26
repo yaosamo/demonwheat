@@ -5,7 +5,6 @@ var hitvalue = preload("res://Scenes/hit_value.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print_debug("Im 2nd?")
 	set_process_input(true) # Enable input processing
 
 func pressed():

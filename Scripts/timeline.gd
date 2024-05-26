@@ -5,12 +5,12 @@ extends Node2D
 @onready var game = get_node("/root/GameState")
 
 @export var demonCallTime : float = 12
-var speed : float = 0.25 #0.25 def
+var speed : float = 0.5 #0.25 def
 var demonsPresented : bool
 var maxProgress := 12
 var paid := false
 var secondTimer := 10
-var baseQuota := 30 #199 def
+var baseQuota := 30 #199 def hard
 var currentProgress
 var firstExpEnded : bool
 var firstExpStarted : bool
@@ -50,10 +50,11 @@ func _process(delta):
 		if demonsPresented and %ProgressBar.value > 0:
 			# 100/second timer gives me step step to achieve desired seconds (5 for example) 100/5 = 20*delta therefore 5 sec to 100 
 			%ProgressBar.value -= (100/secondTimer)*delta
-			%lastTimerLabel.text = "Give up in.." + str(ceil(%ProgressBar.value/(100/secondTimer)))
+			%lastTimerLabel.text = "Paying in " + str(ceil(%ProgressBar.value/(100/secondTimer)))
 			
 		if %ProgressBar.value < 1 and !paid:
-			death()
+			paynow()
+		
 	else:
 		if game.wheat > 9 and game.wave == 0 and !firstExpStarted:
 			firstExpStarted = true
@@ -72,14 +73,14 @@ func firstExpFlow(step):
 	match step:
 		1:
 			print_debug("First step")
-			%payQ.text = "Hmm, yes, why?"
+			%payQ.text = "Yea"
 			%vContainerTop.visible = false
 			%vContainerBottom.visible = false
 			fExp_step += 1
 		2:
 			print_debug("Second step")
 			%talk.text = "I’ll be back in a year and..."
-			%payQ.text = "Ugh, ok"
+			%payQ.text = "Ok"
 			%vContainerTop.visible = true
 			fExp_step += 1
 		3:
@@ -91,15 +92,14 @@ func firstExpFlow(step):
 			%ProgressBar.value = 100
 			$DemAppear.visible = false
 			%vContainerBottom.visible = true
+			%payQ.visible = false
 			
 			
 
 func demonCall(talk_text := ""):
 	if firstExpStarted:
 		firstExpFlow(fExp_step)
-	# calculating size of the bubble
 	%talk.text = talk_text if talk_text else dialogue.pick_random()
-	# add 10s timer if not paid by then goto death
 	$DemAppear.visible = true
 	demonsPresented = true
 	print_debug("hello I am a demon")
@@ -124,8 +124,9 @@ func death():
 func _on_pay_q_pressed() -> void:
 	if firstExpStarted:
 		firstExpFlow(fExp_step)
-		#refactor so it uses separate function for the flow
-	#check if wheat is available
+	pass 
+
+func paynow():
 	if game.wheat >= demonQuota and firstExpEnded:
 		game.wheat -= demonQuota
 		print_debug("paid")
@@ -134,10 +135,9 @@ func _on_pay_q_pressed() -> void:
 		%ProgressBar.value = 100
 		$DemAppear.visible = false
 		print_debug("Demons are invisible")
-		$demonsMus.stop()
 		startNextWave()
-	pass 
-
+	else:
+		death()
 
 func startNextWave():
 	# next wave
@@ -151,9 +151,8 @@ func startNextWave():
 	demonCallTime = maxProgress
 	# move to starting point
 	$DemonIcon.position.x = maxProgress
-	$"/root/Main/BgMusic".play()
 	$"/root/Main/".saveGame()
 	$"/root/Main/".addBonuses()
 
 func calcQuota() -> int:
-	return baseQuota*pow(1.25, game.wave)
+	return baseQuota*pow(1.55, game.wave)
