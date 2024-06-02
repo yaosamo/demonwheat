@@ -10,6 +10,7 @@ var demonsPresented : bool
 var maxProgress := 12
 var paid := false
 var secondTimer := 10
+var timer : float = 10
 var baseQuota := 30 #199 def hard
 var currentProgress
 var firstExpEnded : bool
@@ -61,13 +62,7 @@ func _process(delta):
 			demonCall("Oh-oh so you're new farmer here?")
 		if game.wave > 0:
 			firstExpEnded = true
-		
-	# music stop and play when demons arrive
-	# if demonCallTime <= 4 and !$demonsMus.playing:
-		#$"/root/Main/BgMusic".stop()
-		#$demonsMus.play()
-		#pass
-
+			
 
 func firstExpFlow(step):
 	match step:
@@ -156,4 +151,4 @@ func startNextWave():
 	$"/root/Main/".addBonuses()
 
 func calcQuota() -> int:
-	return baseQuota*pow(1.55, game.wave)
+	return baseQuota*pow(1.35, game.wave)
